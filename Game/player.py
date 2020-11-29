@@ -293,13 +293,24 @@ class Player(object):
 
 					# Update map coordinates in dictionary
 					self.mapCoords[scene] = self.mapx, self.mapy
-					print(self.mapCoords[scene])
+					
+					# print(self.mapCoords[scene])
 				# For fixed maps, just add the delta x,y to the player's position
 				else:
 					if self.direction == "right": self.x += self.dx
 					elif self.direction == "left": self.x += self.dx
 					if self.direction == "up": self.y += self.dy
 					elif self.direction == "down": self.y += self.dy
+		
+
+
+
+		if scene in self.mapCoords.keys():
+			# print("haha")
+			print("("+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
+		else:
+			# print("nono")
+			print("("+str(self.x)+", "+str(self.y)+")")
 
 
 	def die(self, click, treasure, maps, fight):

@@ -207,7 +207,7 @@ class Main:
 		self.sceneInfo = {
 			# Contents: Scene name --> rect door --> nect scene name --> player new coordinates
 			"mainWorld" : [
-				[Rect(self.player.mapCoords["mainWorld"][0]+1140,self.player.mapCoords["mainWorld"][1]+1930,20,20), "mainWorldShop", (534,546)],
+				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1911,self.player.mapCoords["mainWorld"][1]+2389,20,20), "surpriseTemple", (550,540)],
@@ -215,7 +215,7 @@ class Main:
 				[Rect(self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2486,30,20), "finalTemple", (519,536)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+998,30,20), "ultimateShop", (519,536)],
 			],
-			"mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1140,self.player.mapCoords["mainWorld"][1]+1970)]],
+			"mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
 
 			"waterTemple" : [
 				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1645,self.player.mapCoords["mainWorld"][1]+219)],
