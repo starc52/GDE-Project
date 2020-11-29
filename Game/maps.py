@@ -36,7 +36,8 @@ class Maps:
 			"surpriseTemple" : [image.load("resources/graphics/map/surpriseTemple.png").convert(), (0,-602), True],
 			"church" : [image.load("resources/graphics/map/church.png").convert(), (0,-790), True],
 			"finalTemple" : [image.load("resources/graphics/map/finalTemple.png").convert(), (0,-312), True],
-			"ultimateShop" : [transform.scale(image.load("resources/graphics/map/ultimateShop.jpg").convert(),(1086,600)), (0,0), False]
+			"ultimateShop" : [transform.scale(image.load("resources/graphics/map/ultimateShop.jpg").convert(),(1086,600)), (0,0), False],
+			"hideout" : [transform.scale(image.load("resources/graphics/map/hideout_final.png").convert(),(1086,600)), (0,0), False]
 		}
 		# Masks for each scene
 		self.allScenesMasks = {
@@ -61,7 +62,8 @@ class Maps:
 			"surpriseTemple" : image.load("resources/graphics/map/surpriseTempleMask.png").convert(),
 			"church" : image.load("resources/graphics/map/churchMask.png").convert(),
 			"finalTemple" : image.load("resources/graphics/map/finalTempleMask.png").convert(),
-			"ultimateShop" : transform.scale(image.load("resources/graphics/map/ultimateShop.jpg").convert(),(1086,600)).convert()
+			"ultimateShop" : transform.scale(image.load("resources/graphics/map/ultimateShop.jpg").convert(),(1086,600)).convert(),
+			"hideout" : transform.scale(image.load("resources/graphics/map/hideout_finalblit.png").convert(),(1086,600)).convert()
 		}
 
 		# Initial World Setup

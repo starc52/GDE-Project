@@ -142,7 +142,8 @@ class Main:
 			"finalTemple" : ["pm", "m[True]", "c", "p","t[not self.isFighting]", 
 							"s[self.story.finalTemple(next)]"],
 
-			"ultimateShop" : ["m", "s[self.story.ultimateShop(click)]", "t"]
+			"ultimateShop" : ["m", "s[self.story.ultimateShop(click)]", "t"],
+			"hideout" : ["m", "s[self.story.hideout(click)]", "t"]
 		}
 
 	def loadStats(self):
@@ -208,6 +209,7 @@ class Main:
 			# Contents: Scene name --> rect door --> nect scene name --> player new coordinates
 			"mainWorld" : [
 				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
+				[Rect(self.player.mapCoords["mainWorld"][0]+9356,self.player.mapCoords["mainWorld"][1]+2216,123,60), "hideout", (540,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1911,self.player.mapCoords["mainWorld"][1]+2389,20,20), "surpriseTemple", (550,540)],
@@ -216,6 +218,7 @@ class Main:
 				[Rect(self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+998,30,20), "ultimateShop", (519,536)],
 			],
 			"mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
+			"hideout" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9311,self.player.mapCoords["mainWorld"][1]+2168)]],
 
 			"waterTemple" : [
 				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1645,self.player.mapCoords["mainWorld"][1]+219)],

@@ -76,7 +76,28 @@ class Treasure:
 				["Boots that increase your","speed."],
 				(565,206),
 				Rect(565,206,50,50)
-			]
+			],
+			"brochure" : [
+				"brochure",
+				transform.scale2x(image.load("resources/graphics/items/brochure.png").convert_alpha()),
+				["Howdy Partner! You have successfully discovered the Black pearl’s control room. From now, you are the caption of the ship. Use it to reach the island to uncover the box of mystery.      P.S. BIEZOM LYPSEAPOCA"        ],
+				(497,205),
+				Rect(497,205,50,50),
+				7],
+			"letter1" : [
+				"letter1",
+				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
+				["Howdy Partner! You have successfully discovered the letter1."],
+				(497,205),
+				Rect(497,205,50,50),
+				7],
+			"letter2" : [
+				"letter2",
+				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
+				["Howdy Partner! You have successfully discovered the second letter."],
+				(497,205),
+				Rect(497,205,50,50),
+				7]
 		}
 
 		# All collected items

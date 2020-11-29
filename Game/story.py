@@ -52,6 +52,15 @@ class Story:
 		# -----------------------------------
 
 		# Speed boots
+		self.letter1 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
+		self.letter2 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
+		self.brochure = transform.scale(image.load("resources/graphics/items/brochure.png"),(70,70))
+		
+
+		# List of all available items (name -> description -> position -> cost -> rect)
+		
+			
+		
 		self.speedBoots = transform.scale(image.load("resources/graphics/items/speedBoots.png"), (70,70))
 
 		# Earth gem animation
@@ -72,6 +81,9 @@ class Story:
 			"earthGem" : [["Some sort of shining gem.", "It seems useless..."], (876,270), 200, Rect(864,262,self.earthGemImage.get_width()*2,self.earthGemImage.get_height()*2)],
 			"healthPotion" : [["Potion to increase your health by 20."], (509,419), 50, Rect(509,419,70,70)],
 			"newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
+			"brochure" : [["Some sort of brochure.", "It seems useless..."], (876,270), 200, Rect(864,262,100,100)],
+			"letter1" : [["Some sort of letter.", "It seems useless..."], (876,270), 200, Rect(864,262,100,100)],
+			"letter2" : [["Some sort of letter.", "It seems useless..."],(132,336), 100, Rect(132,336,100,100)]
 		}
 		# Reuturn rect
 		self.shopReturn = Rect(833,508,300,300)
@@ -360,7 +372,106 @@ class Story:
 					self.message.reset()
 			else:
 				self.message.topMessage("Come back when you have collected all 3 gems!", False)
+	def hideout(self, click):
+		""" Main hideout """
+		pos = mouse.get_pos()
 
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1300)
+
+		# Blit background
+		self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+
+		# Loop through the dictionary and draw the items
+		for key,val in self.availableItems.items():
+			
+
+			if key == "letter1":
+				# Animate gem shine
+				self.screen.blit(self.letter1, val[1])
+			if key == "letter2":
+				# Animate gem shine
+				self.screen.blit(self.letter2, val[1])
+			
+			
+		# General description
+		# Loop through items
+		for item in [	
+			["letter1", Rect(864,262,self.letter1.get_width()*2,self.letter1.get_height()*2)],
+			["letter2", Rect(864,262,self.letter2.get_width()*2,self.letter2.get_height()*2)]
+		]:
+			if not item[1].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+			else:
+				if not item[0] in self.availableItems:
+					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+		# Speed boots
+		
+
+		# Earth gem
+		if "letter1" in self.availableItems:
+			if self.availableItems["letter1"][3].collidepoint(pos):
+				
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][0], True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][1], True, (0,0,0)), (275,109))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["brochure"][2]), True, (255,255,255)), (515,532))
+				if click:
+						# Add item to inventory
+					self.treasure.collectedItems.add("letter1")
+						# Increase the player speed in all maps
+						# Remove item from dictionary
+					self.availableItems.pop("letter1", None)
+						# Notification
+					#if not self.brochureMsgFinished:
+					msg("Howdy Partner!You have successfully discovered the letter1.")
+
+		if "letter2" in self.availableItems:
+			if self.availableItems["letter2"][3].collidepoint(pos):
+				
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][0], True, (0,0,0)), (250,40))
+				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][1], True, (0,0,0)), (250,98))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["brochure"][2]), True, (255,255,255)), (515,532))
+				if click:
+						# Add item to inventory
+					self.treasure.collectedItems.add("letter2")
+						# Increase the player speed in all maps
+						# Remove item from dictionary
+					self.availableItems.pop("letter2", None)
+						# Notification
+					#if not self.brochureMsgFinished:
+					msg("Howdy Partner!You have successfully discovered the letter2.")
+
+
+		if self.shopReturn.collidepoint(pos) and click:
+			# Fade into main world
+			self.fade.fadeDark(self.maps.allScenes["mainWorld"][0], self.screen, self.player.mapCoords["mainWorld"])
+			# Create new scene
+			self.maps.newScene("mainWorld")
+			# Set player coordinates
+			self.player.x = self.player.mapx+9311
+			self.player.y = self.player.mapy+2168
+			# Reset fade
+			self.fade.reset()
+			# Change music
+
+			if not mac:
+				mixer.music.fadeout(500)
+				mixer.music.load(self.sound.getMusic("mainWorldTheme"))
+				mixer.music.play(loops=-1)
 
 	def ultimateShop(self, click):
 		""" Ultimate shop to buy items """

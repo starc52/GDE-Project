@@ -31,8 +31,8 @@ class Player(object):
 		# Player's starting image
 		self.image = self.sprites["down"][0]
 		# Player starting coordinates
-		self.x = 601
-		self.y = 378
+		self.x = 700
+		self.y = 308
 		# Current frame
 		self.frame = 0
 		# Player direction
@@ -119,7 +119,8 @@ class Player(object):
 			"surpriseTemple" : 1.5,
 			"church" : 1.5,
 			"finalTemple" : 1.5,
-			"ultimateShop" : 1.5
+			"ultimateShop" : 1.5,
+			"hideout" : 1.5
 		}
 		# Can the player can move
 		self.canMove = False
