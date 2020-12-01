@@ -79,7 +79,7 @@ class Treasure:
 			],
 			"brochure" : [
 				"brochure",
-				transform.scale2x(image.load("resources/graphics/items/brochure.png").convert_alpha()),
+				transform.scale2x(image.load("resources/graphics/items/brochure_small.png").convert_alpha()),
 				["Howdy Partner! You have successfully discovered the Black pearl’s control room. From now, you are the caption of the ship. Use it to reach the island to uncover the box of mystery.      P.S. BIEZOM LYPSEAPOCA"        ],
 				(497,205),
 				Rect(497,205,50,50),

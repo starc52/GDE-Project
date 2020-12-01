@@ -217,7 +217,7 @@ class Main:
 			"shipCabin" : [[Rect(492,561,80,10), "shipCorridor", (449, 300)]],
 			"shipCorridor" : [
 				[Rect(404,288,90,10), "shipCabin", (543, 511)],
-				[Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9426,self.player.mapCoords["mainWorld"][1]+2344)]
+				[Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9273,self.player.mapCoords["mainWorld"][1]+2125)]
 			],
 			"mainWorld" : [
 				# [Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
