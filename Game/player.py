@@ -8,6 +8,7 @@
 from pygame import *
 from sys import exit as abandon
 
+
 class Player(object):
 	""" Main player class """
 	
@@ -31,12 +32,12 @@ class Player(object):
 		# Player's starting image
 		self.image = self.sprites["down"][0]
 		# Player starting coordinates
-		self.x = 700
-		self.y = 308
+		self.x = 750
+		self.y = 526
 		# Current frame
 		self.frame = 0
 		# Player direction
-		self.direction = "right"
+		self.direction = "up"
 		# Flag to check player movement
 		self.isMoving = False
 		# Flag to check if player is in the boat
@@ -48,6 +49,7 @@ class Player(object):
 		# Starting coordiantes for all scrolling maps
 		#-534, -1585
 		self.mapCoords = {
+			# "shipCorridor":[0, -1324],
 			"mainWorld": [-534, -1585],
 			"waterWorld": [0, -602],
 			"surpriseTemple" : [0, -602],
@@ -61,6 +63,11 @@ class Player(object):
 		# Dictionary of all bounding rects for moving maps
 		# Main boundary rect -> right,left,up,down boundary rects -> corner positions
 		self.boundaries = {
+			# "shipCorridor" : [
+			# 	#788, 300, 150, 600, 150, 600, 1086, 150, 1086, 150, 
+			# 	Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
+			# 	(-3305,0,0,-2176)
+			# ],
 			"mainWorld" : [
 				#788, 300, 150, 600, 150, 600, 1086, 150, 1086, 150, 
 				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
@@ -101,6 +108,8 @@ class Player(object):
 		self.frameSpeed = .2
 		# All player speeds based on map
 		self.speeds = {
+			"shipCabin" : 1.5,
+			"shipCorridor" : 1.5,
 			"mainWorld" : 1.5,
 			"mainWorldShop" : 2,
 			"waterTemple": 2,
@@ -238,7 +247,7 @@ class Player(object):
 				self.waterAttempt = True
 			else:
 				self.waterAttempt = False
-
+			# print(self.collision(mask, scene))
 			# Check player's future position
 			if (self.collision(mask, scene) != "black" and self.collision(mask, scene) != "water") or \
 				(self.collision(mask, scene) == "water" and self.inBoat):# \

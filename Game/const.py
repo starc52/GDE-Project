@@ -7,5 +7,6 @@
 
 import os
 
+
 # Playing music on mac will not work
 mac = os.name == "posix"

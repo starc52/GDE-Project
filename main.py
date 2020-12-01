@@ -34,8 +34,8 @@ class Main:
 	def __init__(self):
 		self.screen = display.set_mode((1086,600))
 		self.screenW, self.screenH = 1086, 600
-		display.set_caption("The Third Element")
-		display.set_icon(image.load("resources/graphics/misc/icon.png").convert_alpha())
+		display.set_caption("The Game")
+		display.set_icon(image.load("resources/graphics/misc/icon.jpg").convert_alpha())
 
 		# Play intro music
 		if not mac:
@@ -55,7 +55,7 @@ class Main:
 		self.introTextOver = False
 		# Text y-coordinate
 		self.introY = 600
-
+		self.count=0
 		self.cursor = transform.scale2x(image.load("resources/graphics/misc/cursor.png").convert_alpha())
 		self.newGame = Rect(203,268,240,63)
 		self.loadGame = Rect(626,268,254,63)
@@ -143,7 +143,10 @@ class Main:
 							"s[self.story.finalTemple(next)]"],
 
 			"ultimateShop" : ["m", "s[self.story.ultimateShop(click)]", "t"],
-			"hideout" : ["m", "s[self.story.hideout(click)]", "t"]
+			"hideout" : ["m", "s[self.story.hideout(click)]", "t"], 
+			"shipCorridor":["pm", "i[self.story.shipCorridorMsgFinished]","s[self.story.shipCorridor(next)]", "m", "p", "c", "t"], 
+			"shipCabin" : ["pm", "i[self.story.shipCabinMsgFinished]", "s[self.story.shipCabin(next)]", "m", "p", "c", "t"]
+		
 		}
 
 	def loadStats(self):
@@ -196,7 +199,7 @@ class Main:
 			time.delay(1000)
 			self.introTextOver = True
 			self.startOver = True
-			self.fade.fadeDark(self.maps.allScenes["mainWorld"][0], self.screen, self.player.mapCoords["mainWorld"])
+			self.fade.fadeDark(self.maps.allScenes["shipCorridor"][0], self.screen, (0, 0))
 			self.fade.reset()
 
 	def objectUpdate(self):
@@ -207,6 +210,11 @@ class Main:
 		# Scrolling maps need constant rect updates
 		self.sceneInfo = {
 			# Contents: Scene name --> rect door --> nect scene name --> player new coordinates
+			"shipCabin" : [[Rect(492,561,80,10), "shipCorridor", (449, 300)]],
+			"shipCorridor" : [
+				[Rect(404,288,90,10), "shipCabin", (543, 511)],
+				[Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1234,self.player.mapCoords["mainWorld"][1]+1850)]
+			],
 			"mainWorld" : [
 				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+9356,self.player.mapCoords["mainWorld"][1]+2216,123,60), "hideout", (540,546)],
@@ -324,6 +332,7 @@ class Main:
 		for rectObj in sceneRects:
 			# Check for collision
 			if rectObj[0].colliderect(self.playerRect):
+
 				# Fade to scene
 				self.fade.reset()
 				# Pass map coordinates if needed
@@ -396,7 +405,28 @@ class Main:
 		# If the player is alive
 		if self.player.isAlive:
 
-			if self.maps.sceneName == "mainWorld":
+			if self.maps.sceneName == "shipCabin":
+				if self.story.shipCabinMsgFinished:
+					self.player.move(self.maps.scrollingCamera, not self.isFighting, 
+						self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
+				self.maps.render(self.screen, self.player.mapx, self.player.mapy)
+				self.player.render()
+				self.treasure.render(self.story.shipCabinMsgFinished, True, click, not self.fight.fighting, self.message)
+				self.story.shipCabin(next)
+			
+			elif self.maps.sceneName == "shipCorridor":
+	
+				# Call scene functions
+				if self.story.shipCorridorMsgFinished:
+					self.player.move(self.maps.scrollingCamera, not self.isFighting, 
+						self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
+				self.maps.render(self.screen, self.player.mapx, self.player.mapy)
+				self.player.render()
+				self.treasure.render(self.story.shipCorridorMsgFinished, True, click, not self.fight.fighting, self.message)
+				self.story.shipCorridor(next)
+				
+	
+			elif self.maps.sceneName == "mainWorld":
 				# Activities when player is not in a fight
 				if not self.isFighting:
 
@@ -434,7 +464,17 @@ class Main:
 							self.player.isMoving = False
 
 			else:
-
+				if self.maps.sceneName == "shipCabin":
+					if self.story.shipCabinMsgFinished:
+						self.fade.reset()
+						if not self.maps.allScenes["mainWorld"][2]:
+							self.fade.fadeDark(self.maps.allScenes["mainWorld"][0], self.screen, self.maps.allScenes["mainWorld"][1])
+						# Create new scene
+						self.maps.newScene("mainWorld")
+						# Set new player coordinates
+						self.player.x = self.sceneInfo["shipCabin"][0][2][0]
+						self.player.y = self.sceneInfo["shipCabin"][0][2][1]
+						
 				# Use the scene sequences dictionary to call methods in order
 				for action in self.sceneSequences[self.maps.sceneName]:
 					# Move player
@@ -553,7 +593,7 @@ while running:
 			# New game
 			if Game.newGameMode:
 				if Game.introTextOver:
-					Game.fade.fadeDark(Game.maps.allScenes["mainWorld"][0], Game.screen, Game.player.mapCoords["mainWorld"])
+					Game.fade.fadeDark(Game.maps.allScenes["shipCorridor"][0], Game.screen, (0, 0))
 					Game.fade.reset()
 					playing = True
 
@@ -565,8 +605,9 @@ while running:
 			if Game.loadGameMode:
 				Game.loadStats()
 				Game.loadGameMode = False
-				Game.fade.fadeDark(Game.maps.allScenes["mainWorld"][0], Game.screen, Game.player.mapCoords["mainWorld"])
+				Game.fade.fadeDark(Game.maps.allScenes["shipCorridor"][0], Game.screen, (0, 0))
 				Game.fade.reset()
+				# Game.story.shipCorridor(next)
 				playing = True
 
 		# Start the game

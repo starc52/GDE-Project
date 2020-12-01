@@ -8,6 +8,7 @@
 from pygame import *
 from Game.const import *
 
+
 class Story:
 	""" Story line class """
 
@@ -44,6 +45,8 @@ class Story:
 		self.waterWorldBossMsgFinished = False
 		self.churchMsgFinished = False
 		self.finalTempleMsgFinished = False
+		self.shipCorridorMsgFinished = False
+		self.shipCabinMsgFinished = False
 
 		# Flag to see if game is over (player won)
 		self.gameWon = False
@@ -55,7 +58,7 @@ class Story:
 		self.letter1 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
 		self.letter2 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
 		self.brochure = transform.scale(image.load("resources/graphics/items/brochure.png"),(70,70))
-		
+		self.worldMap = transform.scale(image.load("resources/graphics/map/null.png"),(70,70))
 
 		# List of all available items (name -> description -> position -> cost -> rect)
 		
@@ -83,7 +86,9 @@ class Story:
 			"newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
 			"brochure" : [["Some sort of brochure.", "It seems useless..."], (876,270), 200, Rect(864,262,100,100)],
 			"letter1" : [["Some sort of letter.", "It seems useless..."], (876,270), 200, Rect(864,262,100,100)],
-			"letter2" : [["Some sort of letter.", "It seems useless..."],(132,336), 100, Rect(132,336,100,100)]
+			"letter2" : [["Some sort of letter.", "It seems useless..."],(132,336), 100, Rect(132,336,100,100)], 
+			"worldMap" : [["WorldMap", "It seems usefull..."],(540,192), 100, Rect(540,192,100,100)]
+		
 		}
 		# Reuturn rect
 		self.shopReturn = Rect(833,508,300,300)
@@ -126,12 +131,12 @@ class Story:
 
 		# Only do the narration scene once
 		if not self.mainWorldMsgFinished:
-			self.message.narration(["Welcome Sylon!",
-									"The people of Oslax need your help...",
-									"Restore the land by collecting the 3 elemental gems...",
-									"Explore the land and prepare to face what lies ahead...",
-									"Go and find the the enterances to new worlds!",
-									"But first, explore this building..."], next, "top")
+			self.message.narration(["Welcome Sylon!",\
+				"The people of Oslax need your help...",\
+				"Restore the land by collecting the 3 elemental gems...",\
+				"Explore the land and prepare to face what lies ahead...",\
+				"Go and find the the enterances to new worlds!",\
+				"But first, explore this building..."], next, "top")
 			if self.message.done:
 				self.mainWorldMsgFinished = True
 				if not mac:
@@ -372,6 +377,7 @@ class Story:
 					self.message.reset()
 			else:
 				self.message.topMessage("Come back when you have collected all 3 gems!", False)
+	
 	def hideout(self, click):
 		""" Main hideout """
 		pos = mouse.get_pos()
@@ -472,6 +478,125 @@ class Story:
 				mixer.music.fadeout(500)
 				mixer.music.load(self.sound.getMusic("mainWorldTheme"))
 				mixer.music.play(loops=-1)
+
+	def shipCorridor(self, next):
+		""" Main surprise temple """
+		#pos = mouse.get_pos()
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1600)
+
+		# Only do the narration scene once
+		if not self.shipCorridorMsgFinished:
+			self.message.narration(["Bla1","Bla Bla Bla2","Bla Bla Bla3","Bla4"], next, "top")
+			if self.message.done:
+				self.shipCorridorMsgFinished = True
+				self.message.reset()
+
+		for key,val in self.availableItems.items():
+			if key == "brochure":
+				self.screen.blit(self.brochure, val[1])
+				break
+
+
+		'''for item in [
+			["key", Rect(153,133,70,70)], 
+			["laptop", Rect(509,419,70,70)]
+		]:
+			if not item[1].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+			else:
+				if not item[0] in self.availableItems:
+					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+					'''
+		#print("pos 1 ")
+		#print(pos)
+		pos=[self.player.x,self.player.y]
+		#pos=(x,y)
+		# Speed boots
+		if "brochure" in self.availableItems:
+			if self.availableItems["brochure"][3].collidepoint(pos):
+				# Word wrap text
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["brochure"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["speedBoots"][2]), True, (255,255,255)), (515,532))
+				self.treasure.collectedItems.add("brochure")
+				
+				self.availableItems.pop("brochure", None)
+						# Notification
+				msg("You obtained the brochure!")
+					
+		#print("pos 2 ")
+		#print(pos)
+		# Earth gem
+	
+	def shipCabin(self, next):
+		""" Main surprise temple """
+			#pos = mouse.get_pos()
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1600)
+		if not self.shipCabinMsgFinished:
+			print("Reached Narration")
+			self.message.narration(["Looks like a control room of sorts","I should look for a map and steer this ship to the island like in the anagram"], next, "top")
+			if self.message.done:
+				self.shipCabinMsgFinished = True
+				self.message.reset()
+
+		for key,val in self.availableItems.items():
+			if key == "worldMap":
+				self.screen.blit(self.worldMap, val[1])
+
+		'''for item in [
+			["key", Rect(153,133,70,70)], 
+			["laptop", Rect(509,419,70,70)]
+		]:
+			if not item[1].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+			else:
+				if not item[0] in self.availableItems:
+					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+					'''
+		#print("pos 1 ")
+		#print(pos)
+		pos=[self.player.x,self.player.y]
+		#pos=(x,y)
+		# Speed boots
+		if "worldMap" in self.availableItems:
+			if self.availableItems["worldMap"][3].collidepoint(pos):
+				# Word wrap text
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["worldMap"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["speedBoots"][2]), True, (255,255,255)), (515,532))
+				self.treasure.collectedItems.add("worldMap")
+				
+				self.availableItems.pop("worldMap", None)
+						# Notification
+				msg("You obtained the worldMap!")
+				
+					
 
 	def ultimateShop(self, click):
 		""" Ultimate shop to buy items """

@@ -8,6 +8,7 @@
 from pygame import *
 from random import *
 
+
 class Fade:
 	""" Fade from one scene into another """
 	

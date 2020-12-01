@@ -7,6 +7,7 @@
 
 from pygame import *
 
+
 class Maps:
 	""" Main map class """
 	
@@ -15,6 +16,8 @@ class Maps:
 		self.player = player
 		# Dictionary with map image -> coordinates -> scrolling camera
 		self.allScenes = {
+			"shipCabin" : [image.load("resources/graphics/map/controlroom.png").convert(), (0,0), False], 
+			"shipCorridor" : [image.load("resources/graphics/map/final_corridor.png").convert(), (0,0), False],
 			"mainWorld" : [transform.scale2x(image.load("resources/graphics/map/mainWorld.png").convert()), (-534,-1585), True],
 			"mainWorldShop" : [image.load("resources/graphics/map/mainWorldShop.png").convert(), (0,0), False],
 
@@ -41,6 +44,8 @@ class Maps:
 		}
 		# Masks for each scene
 		self.allScenesMasks = {
+			"shipCabin" : image.load("resources/graphics/map/controlroomblit.png").convert(), 
+			"shipCorridor" : image.load("resources/graphics/map/final_corridorblit.png").convert(),
 			"mainWorld" : transform.scale2x(image.load("resources/graphics/map/mainWorldMask.png").convert()),
 			"mainWorldShop" : image.load("resources/graphics/map/mainWorldShopMask.png").convert(),
 
@@ -67,7 +72,7 @@ class Maps:
 		}
 
 		# Initial World Setup
-		self.sceneName = "mainWorld"
+		self.sceneName = "shipCorridor"
 		# Current image
 		self.image = self.allScenes[self.sceneName][0]
 		# Scrolling camera boolean
@@ -94,7 +99,9 @@ class Maps:
 
 		# If map can move blit it at specific coordinates
 		if self.allScenes[self.sceneName][2]:
+			# print(self.sceneName, x, y)
 			screen.blit(self.image, (x,y))
 		# If not blit it at the top left
 		else:
+			# print(self.sceneName)
 			screen.blit(self.image, (0,0))

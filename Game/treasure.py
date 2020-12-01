@@ -97,6 +97,13 @@ class Treasure:
 				["Howdy Partner! You have successfully discovered the second letter."],
 				(497,205),
 				Rect(497,205,50,50),
+				7],
+			"worldMap" : [
+				"worldMap",
+				transform.scale(image.load("resources/graphics/map/null.png").convert_alpha(), (10, 10)),
+				["Howdy Partner! You have successfully discovered the second letter."],
+				(540,192),
+				Rect(540,192,50,50),
 				7]
 		}
 

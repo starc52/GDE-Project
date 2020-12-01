@@ -8,6 +8,7 @@
 from pygame import *
 from random import choice
 
+
 class Enemy(object):
 	""" Enemy class """
 	

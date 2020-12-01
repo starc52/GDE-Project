@@ -8,6 +8,7 @@
 from pygame import *
 from random import choice, randint
 
+
 class Chest:
 	""" Handles treasure chest actions """
 	

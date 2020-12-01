@@ -11,6 +11,7 @@ from random import randint, choice
 from Game.enemy import Enemy
 from Game.const import *
 
+
 class Fight:
 	""" Main fight class """
 	
