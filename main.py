@@ -106,7 +106,11 @@ class Main:
 		self.sceneSequences = {
 			# Main world
 			"mainWorldShop" :   ["pm", "m", "p", "t", "s[self.story.mainWorldShop(next)]"],
+			"BurntHouse" :   ["pm", "m", "p", "t", "s[self.story.BurntHouse(next)]"],
 
+			"dungeon" :   ["pm", "m", "p", "t", "s[self.story.dungeon(next)]"],
+			"Lab" :   ["pm", "m","p", "t", "s[self.story.Lab(next)]"],
+			"finalisland" :   ["pm", "m","p", "t", "s[self.story.finalisland(next)]"],
 			"waterTemple" :		["pm", "m", "s[self.story.temple('water')]", "p", "t"],
 			"waterWorldEnter" : ["pm", "m", "s[self.story.waterWorldEnter()]", "p", "t"],
 			# Water world
@@ -213,10 +217,11 @@ class Main:
 			"shipCabin" : [[Rect(492,561,80,10), "shipCorridor", (449, 300)]],
 			"shipCorridor" : [
 				[Rect(404,288,90,10), "shipCabin", (543, 511)],
-				[Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1234,self.player.mapCoords["mainWorld"][1]+1850)]
+				[Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9426,self.player.mapCoords["mainWorld"][1]+2344)]
 			],
 			"mainWorld" : [
-				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
+				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (534,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+9356,self.player.mapCoords["mainWorld"][1]+2216,123,60), "hideout", (540,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
@@ -224,14 +229,26 @@ class Main:
 				[Rect(self.player.mapCoords["mainWorld"][0]+1036,self.player.mapCoords["mainWorld"][1]+2814,20,20), "church", (525,413)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2486,30,20), "finalTemple", (519,536)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+998,30,20), "ultimateShop", (519,536)],
+				[Rect(self.player.mapCoords["mainWorld"][0]+11566,self.player.mapCoords["mainWorld"][1]+8194,30,20), "finalisland", (519,536)],
 			],
-			"mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
-			"hideout" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9311,self.player.mapCoords["mainWorld"][1]+2168)]],
+			# "mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
+			"BurntHouse" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
+							[Rect(178,-4.5,25,15), "dungeon", (543,546)]	],
+			"dungeon" : [[Rect(1045,510,35,65), "BurntHouse", (196.5,13.5)],
+						[Rect(5,542,130,130), "Lab", (1057.5,398)]	],
 
+
+			"Lab" : [[Rect(671.5,240,25,15), "mainWorld", (self.player.mapCoords["mainWorld"][0]+11565.75,self.player.mapCoords["mainWorld"][1]+8198)],
+					 [Rect(233.5,550,130,40), "dungeon", (9,452.5)]	],
+
+			"hideout" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9426,self.player.mapCoords["mainWorld"][1]+2344)]],
+			"finalisland" : [
+				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+11517,self.player.mapCoords["mainWorld"][1]+8171)]],
 			"waterTemple" : [
 				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1645,self.player.mapCoords["mainWorld"][1]+219)],
 				[Rect(546,113,25,15), "waterWorldEnter", (517,456)]
 			],
+
 			"waterWorldEnter" : [
 				[Rect(484,591,100,20), "waterTemple", (543,180)],
 				[Rect(503,292,70,60), "waterWorld", (533,526)]

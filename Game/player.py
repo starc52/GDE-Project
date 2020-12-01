@@ -50,7 +50,7 @@ class Player(object):
 		#-534, -1585
 		self.mapCoords = {
 			# "shipCorridor":[0, -1324],
-			"mainWorld": [-534, -1585],
+			"mainWorld": [-8340, -1744],
 			"waterWorld": [0, -602],
 			"surpriseTemple" : [0, -602],
 			"waterWorldBoss" : [0, -572],
@@ -129,7 +129,11 @@ class Player(object):
 			"church" : 1.5,
 			"finalTemple" : 1.5,
 			"ultimateShop" : 1.5,
-			"hideout" : 1.5
+			"hideout" : 1.5,
+			"BurntHouse" : 1.5,
+			"dungeon":2,
+			"Lab":2,
+			"finalisland":2
 		}
 		# Can the player can move
 		self.canMove = False

@@ -5,6 +5,7 @@
 # The Last Element
 # ICS3U Final Project
 
+from Game.player import Player
 from pygame import *
 from Game.const import *
 
@@ -45,6 +46,10 @@ class Story:
 		self.waterWorldBossMsgFinished = False
 		self.churchMsgFinished = False
 		self.finalTempleMsgFinished = False
+		self.BurntHouseMsgFinished = False
+		self.LabHouseMsgFinished = False
+		self.islandMsgFinished = False
+
 		self.shipCorridorMsgFinished = False
 		self.shipCabinMsgFinished = False
 
@@ -59,7 +64,11 @@ class Story:
 		self.letter2 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
 		self.brochure = transform.scale(image.load("resources/graphics/items/brochure.png"),(70,70))
 		self.worldMap = transform.scale(image.load("resources/graphics/map/null.png"),(70,70))
-
+		self.key = transform.scale(image.load("resources/graphics/items/key.png"),(70,70))
+		self.laptop = transform.scale(image.load("resources/graphics/items/laptop.png"),(160,130))
+		self.testtube = transform.scale(image.load("resources/graphics/items/testtube.png"),(70,70))
+		self.microscope = transform.scale(image.load("resources/graphics/items/microscope.png"),(70,70))
+		self.chestbox = transform.scale(image.load("resources/graphics/items/chest.png"),(70,70))
 		# List of all available items (name -> description -> position -> cost -> rect)
 		
 			
@@ -87,7 +96,13 @@ class Story:
 			"brochure" : [["Some sort of brochure.", "It seems useless..."], (876,270), 200, Rect(864,262,100,100)],
 			"letter1" : [["Some sort of letter.", "It seems useless..."], (876,270), 200, Rect(864,262,100,100)],
 			"letter2" : [["Some sort of letter.", "It seems useless..."],(132,336), 100, Rect(132,336,100,100)], 
-			"worldMap" : [["WorldMap", "It seems usefull..."],(540,192), 100, Rect(540,192,100,100)]
+			"worldMap" : [["WorldMap", "It seems usefull..."],(540,192), 100, Rect(540,192,100,100)],
+			"key" : [["These seems key."], (429,339), 30, Rect(429,339,70,70)],
+			"laptop" : [["Seems useless laptop."], (648,270), 200, Rect(648,270,self.laptop.get_width()*2,self.laptop.get_height()*2)],
+			"testtube" : [["Seems useless testtube."], (123.5,464), 200, Rect(123.5,464,70,70)],
+			"microscope" : [["Seems useless microscope."], (648,270), 200, Rect(648,270,70,70)],
+			"chestbox" : [["treasure box."], (541,46), 200, Rect(541,46,70,70)]
+
 		
 		}
 		# Reuturn rect
@@ -595,7 +610,230 @@ class Story:
 				self.availableItems.pop("worldMap", None)
 						# Notification
 				msg("You obtained the worldMap!")
+
+	def BurntHouse(self, next):
+		""" Main surprise temple """
+		#pos = mouse.get_pos()
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1600)
+
+		# Only do the narration scene once
+		if not self.BurntHouseMsgFinished:
+			self.message.narration(["Welcome to the house of a great scientist",
+									"It is said that he hid all his treasures in this castle...",
+									"But amongst his treasures lie traps as well...",
+									"Beware what chests you open.."
+									], next, "top")
+			if self.message.done:
+				self.BurntHouseMsgFinished = True
+				self.message.reset()
+		for key,val in self.availableItems.items():
+			if key == "key":
+				self.screen.blit(self.key, val[1])
+
+			if key == "laptop":
+				self.screen.blit(self.laptop, val[1])
+
+		'''for item in [
+			["key", Rect(153,133,70,70)], 
+			["laptop", Rect(509,419,70,70)]
+		]:
+			if not item[1].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+			else:
+				if not item[0] in self.availableItems:
+					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+					'''
+		#print("pos 1 ")
+		#print(pos)
+		pos=[self.player.x,self.player.y]
+		#pos=(x,y)
+		# Speed boots
+		if "key" in self.availableItems:
+			if self.availableItems["key"][3].collidepoint(pos):
+				# Word wrap text
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["key"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["speedBoots"][2]), True, (255,255,255)), (515,532))
+				self.treasure.collectedItems.add("key")
 				
+				self.availableItems.pop("key", None)
+						# Notification
+				msg("You obtained the key!")
+					
+		#print("pos 2 ")
+		#print(pos)
+		# Earth gem
+		if "laptop" in self.availableItems:
+			if self.availableItems["laptop"][3].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["laptop"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["laptop"][0][1], True, (0,0,0)), (30,100))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["laptop"][2]), True, (255,255,255)), (515,532))
+				self.treasure.collectedItems.add("laptop")
+				
+				self.availableItems.pop("laptop", None)
+						# Notification
+				msg("You obtained the laptop!")
+	def Lab(self, next):
+		""" Main surprise temple """
+		#pos = mouse.get_pos()
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1600)
+
+		# Only do the narration scene once
+		if not self.LabHouseMsgFinished:
+			self.message.narration(["Welcome to the lab of a great scientist",
+									"It is said that he hid all his treasures in this castle...",
+									"Beware what chests you open.."
+									], next, "top")
+			if self.message.done:
+				self.LabHouseMsgFinished = True
+				self.message.reset()
+
+		for key,val in self.availableItems.items():
+			if key == "testtube":
+				self.screen.blit(self.testtube, val[1])
+
+			if key == "microscope":
+				self.screen.blit(self.microscope, val[1])
+
+		'''for item in [
+			["key", Rect(153,133,70,70)], 
+			["laptop", Rect(509,419,70,70)]
+		]:
+			if not item[1].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+			else:
+				if not item[0] in self.availableItems:
+					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+					'''
+		#print("pos 1 ")
+		#print(pos)
+		pos=[self.player.x,self.player.y]
+		#pos=(x,y)
+		# Speed boots
+		if "testtube" in self.availableItems:
+			if self.availableItems["testtube"][3].collidepoint(pos):
+				# Word wrap text
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["testtube"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["speedBoots"][2]), True, (255,255,255)), (515,532))
+				self.treasure.collectedItems.add("testtube")
+				
+				self.availableItems.pop("testtube", None)
+						# Notification
+				msg("You obtained the testtube!")
+					
+		#print("pos 2 ")
+		#print(pos)
+		# Earth gem
+		if "microscope" in self.availableItems:
+			if self.availableItems["microscope"][3].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["microscope"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["laptop"][0][1], True, (0,0,0)), (30,100))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["laptop"][2]), True, (255,255,255)), (515,532))
+				self.treasure.collectedItems.add("microscope")
+				
+				self.availableItems.pop("microscope", None)
+						# Notification
+				msg("You obtained the microsope!")
+					
+	def dungeon(self, next):
+		""" Main surprise temple """
+		#pos = mouse.get_pos()
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1600)
+
+	def finalisland(self, next):
+		""" Main surprise temple """
+		#pos = mouse.get_pos()
+		def msg(text):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(1600)
+
+		if not self.islandMsgFinished:
+			self.message.narration(["Welcome to the final island",
+									"It is said that he hid all his treasures in this castle...",
+									"Beware what chests you open.."
+									], next, "top")
+			if self.message.done:
+				self.islandMsgFinished = True
+				self.message.reset()
+
+		for key,val in self.availableItems.items():
+			if key == "chestbox":
+				self.screen.blit(self.chestbox, val[1])
+
+		'''for item in [
+			["key", Rect(153,133,70,70)], 
+			["laptop", Rect(509,419,70,70)]
+		]:
+			if not item[1].collidepoint(pos):
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+
+			else:
+				if not item[0] in self.availableItems:
+					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+					'''
+		#print("pos 1 ")
+		#print(pos)
+		pos=[self.player.x,self.player.y]
+		#pos=(x,y)
+		# Speed boots
+		if "chestbox" in self.availableItems:
+			if self.availableItems["chestbox"][3].collidepoint(pos):
+				# Word wrap text
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+				self.screen.blit(self.message.font.render(self.availableItems["chestbox"][0][0], True, (0,0,0)), (275,59))
+				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
+				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["speedBoots"][2]), True, (255,255,255)), (515,532))
+				#self.treasure.collectedItems.add("testtube")
+				
+				#self.availableItems.pop("testtube", None)
+						# Notification
+				msg("You need key and password to open it!")
+					
 					
 
 	def ultimateShop(self, click):
