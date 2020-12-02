@@ -44,7 +44,8 @@ class Maps:
 			"hideout" : [transform.scale(image.load("resources/graphics/map/hideout.png").convert(),(1086,600)), (0,0), False],
 			"dungeon" : [transform.scale(image.load("resources/graphics/map/fun_dungeon.png").convert(),(1086,600)), (0,0), False],
 			"Lab" : [transform.scale(image.load("resources/graphics/map/lab1.png").convert(),(1086,600)), (0,0), False],
-			"finalisland" : [transform.scale(image.load("resources/graphics/map/surpriseTemple.png").convert(),(1086,600)), (0,0), False]
+			"finalisland" : [transform.scale(image.load("resources/graphics/map/surpriseTemple.png").convert(),(1086,600)), (0,0), False], 
+			"islandPassword" : [transform.scale(image.load("resources/graphics/map/keypad.jpg").convert(),(1086,600)), (0,0), False]
 		}
 		# Masks for each scene
 		self.allScenesMasks = {
@@ -76,8 +77,8 @@ class Maps:
 			"hideout" : transform.scale(image.load("resources/graphics/map/hideout_finalblit.png").convert(),(1086,600)).convert(),
 			"dungeon" : transform.scale(image.load("resources/graphics/map/fun_dungeonblit.png").convert(),(1086,600)).convert(),
 			"Lab" : transform.scale(image.load("resources/graphics/map/lab1blit.png").convert(),(1086,600)).convert(),
-			"finalisland" : transform.scale(image.load("resources/graphics/map/surpriseTempleMask.png").convert(),(1086,600)).convert()
-
+			"finalisland" : transform.scale(image.load("resources/graphics/map/surpriseTempleMask.png").convert(),(1086,600)).convert(),
+			"islandPassword": transform.scale(image.load("resources/graphics/map/keypad.jpg").convert(),(1086,600)).convert()
 		}
 
 		# Initial World Setup

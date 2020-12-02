@@ -32,6 +32,7 @@ class Main:
 	""" Main game class """
 
 	def __init__(self):
+		self.password=[]
 		self.screen = display.set_mode((1086,600))
 		self.screenW, self.screenH = 1086, 600
 		display.set_caption("The Game")
@@ -106,12 +107,12 @@ class Main:
 		self.sceneSequences = {
 			# Main world
 			"mainWorldShop" :   ["pm", "m", "p", "t", "s[self.story.mainWorldShop(next)]"],
-			"BurntHouse" :   ["i[self.story.BurntHouseMsgFinished]","pm", "m", "p", "t", "s[self.story.BurntHouse(next)]"],
+			"BurntHouse" :   ["i[self.story.BurntHouseMsgFinished]","pm", "m", "p", "t[self.story.BurntHouseMsgFinished]","c","s[self.story.BurntHouse(next)]"],
 			#"BurntHouse" :   ["pm", "i[self.story.BurntHouseMsgFinished]","s[self.story.BurntHouse(next)]", "m", "p", "c", "t"],
 			"dungeon" :   ["pm", "m", "p", "t", "s[self.story.dungeon(next)]"],
 			#"Lab" : ["pm", "i[self.story.LabHouseMsgFinished]","s[self.story.Lab(next)]", "m", "p", "c", "t"],
-			"Lab" :   ["i[self.story.LabHouseMsgFinished]","pm", "m","p", "t", "s[self.story.Lab(next)]"],
-			"finalisland" :   ["pm", "m","p", "t", "s[self.story.finalisland(next)]"],
+			"Lab" :   ["i[self.story.LabHouseMsgFinished]","pm", "m","p", "t[self.story.LabHouseMsgFinished]", "s[self.story.Lab(next)]"],
+			"finalisland" :   ["i[self.story.islandMsgFinished]", "pm", "m","p", "t[self.story.islandMsgFinished]", "s[self.story.finalisland(next)]"],
 			"waterTemple" :		["pm", "m", "s[self.story.temple('water')]", "p", "t"],
 			"waterWorldEnter" : ["pm", "m", "s[self.story.waterWorldEnter()]", "p", "t"],
 			# Water world
@@ -148,9 +149,10 @@ class Main:
 							"s[self.story.finalTemple(next)]"],
 
 			"ultimateShop" : ["m", "s[self.story.ultimateShop(click)]", "t"],
+			"islandPassword" : ["m", "s[self.story.islandPassword(click, self.password)]", "t"],
 			"hideout" : ["m", "s[self.story.hideout(click)]", "t"], 
-			"shipCorridor":["pm", "i[self.story.shipCorridorMsgFinished]","s[self.story.shipCorridor(next)]", "m", "p", "c", "t"], 
-			"shipCabin" : ["pm", "i[self.story.shipCabinMsgFinished]", "s[self.story.shipCabin(next)]", "m", "p", "c", "t"]
+			"shipCorridor":["i[self.story.shipCorridorMsgFinished]","pm", "s[self.story.shipCorridor(next)]", "m", "p", "c", "t"], 
+			"shipCabin" : ["i[self.story.shipCabinMsgFinished]", "pm", "s[self.story.shipCabin(next)]", "m", "p", "c", "t"]
 		
 		}
 
@@ -293,6 +295,7 @@ class Main:
 			"church" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1036,self.player.mapCoords["mainWorld"][1]+2854)]],
 			"finalTemple" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2520)]],
 			"ultimateShop" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+1050)]],
+			"islandPassword" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+1050)]],
 		}
 
 		# Update map coordinates if map has a scrolling cameras
@@ -339,7 +342,6 @@ class Main:
 		self.inWater = self.player.inBoat
 		pos = mouse.get_pos()
 		keys = key.get_pressed()
-
 		# Update objects
 		self.objectUpdate()
 		# Create list of data from current scene
@@ -421,8 +423,31 @@ class Main:
 
 		# If the player is alive
 		if self.player.isAlive:
-
-			if self.maps.sceneName == "shipCabin":
+			if self.maps.sceneName == "BurntHouse":
+				if self.story.BurntHouseMsgFinished:
+					self.player.move(self.maps.scrollingCamera, not self.isFighting, 
+						self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
+				self.maps.render(self.screen, self.player.mapx, self.player.mapy)
+				self.player.render()
+				self.treasure.render(self.story.BurntHouseMsgFinished, True, click, not self.fight.fighting, self.message)
+				self.story.BurntHouse(next)
+			elif self.maps.sceneName == "Lab":
+				if self.story.LabHouseMsgFinished:
+					self.player.move(self.maps.scrollingCamera, not self.isFighting, 
+						self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
+				self.maps.render(self.screen, self.player.mapx, self.player.mapy)
+				self.player.render()
+				self.treasure.render(self.story.LabHouseMsgFinished, True, click, not self.fight.fighting, self.message)
+				self.story.Lab(next)
+			elif self.maps.sceneName == "finalisland":
+				if self.story.islandMsgFinished:
+					self.player.move(self.maps.scrollingCamera, not self.isFighting, 
+						self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
+				self.maps.render(self.screen, self.player.mapx, self.player.mapy)
+				self.player.render()
+				self.treasure.render(self.story.islandMsgFinished, True, click, not self.fight.fighting, self.message)
+				self.story.finalisland(next)
+			elif self.maps.sceneName == "shipCabin":
 				if self.story.shipCabinMsgFinished:
 					self.player.move(self.maps.scrollingCamera, not self.isFighting, 
 						self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
@@ -481,25 +506,23 @@ class Main:
 							self.player.isMoving = False
 
 			else:
-				if self.maps.sceneName == "shipCabin":
-					if self.story.shipCabinMsgFinished:
-						self.fade.reset()
-						if not self.maps.allScenes["mainWorld"][2]:
-							self.fade.fadeDark(self.maps.allScenes["mainWorld"][0], self.screen, self.maps.allScenes["mainWorld"][1])
-						# Create new scene
-						self.maps.newScene("mainWorld")
-						# Set new player coordinates
-						self.player.x = self.sceneInfo["shipCabin"][0][2][0]
-						self.player.y = self.sceneInfo["shipCabin"][0][2][1]
+				# if self.maps.sceneName == "shipCabin":
+				# 	print("Ha your gut's wrong")
+				# 	if self.story.shipCabinMsgFinished:
+				# 		self.fade.reset()
+				# 		if not self.maps.allScenes["mainWorld"][2]:
+				# 			self.fade.fadeDark(self.maps.allScenes["mainWorld"][0], self.screen, self.maps.allScenes["mainWorld"][1])
+				# 		# Create new scene
+				# 		self.maps.newScene("mainWorld")
+				# 		# Set new player coordinates
+				# 		self.player.x = self.sceneInfo["shipCabin"][0][2][0]
+				# 		self.player.y = self.sceneInfo["shipCabin"][0][2][1]
 						
 				# Use the scene sequences dictionary to call methods in order
 				for action in self.sceneSequences[self.maps.sceneName]:
 					# Move player
-					if action == "pm":
-						self.player.move(self.maps.scrollingCamera, not self.isFighting, 
-							self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
 					# Render map
-					elif action[0] == "m":
+					if action[0] == "m":
 						# Scrolling map
 						if len(action) > 1:
 							self.maps.render(self.screen, self.player.mapx, self.player.mapy)
@@ -529,6 +552,10 @@ class Main:
 					# Render treasure chest
 					elif action == "c":
 						self.chest.render(self.playerRect)
+					
+					elif action == "pm":
+						self.player.move(self.maps.scrollingCamera, not self.isFighting, self.maps.sceneName, self.maps.mask, self.treasure.collectedItems, self.treasure, self.maps)
+					
 
 
 			# Render fight scenes

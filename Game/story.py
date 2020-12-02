@@ -49,6 +49,7 @@ class Story:
 		self.BurntHouseMsgFinished = False
 		self.LabHouseMsgFinished = False
 		self.islandMsgFinished = False
+		self.passwordMsgFinished=False
 
 		self.shipCorridorMsgFinished = False
 		self.shipCabinMsgFinished = False
@@ -101,7 +102,7 @@ class Story:
 			"laptop" : [["Seems useless laptop."], (740,230), 200, Rect(740,230,100,100)],
 			"testtube" : [["Seems useless testtube."], (123.5,464), 200, Rect(123.5,464,70,70)],
 			"microscope" : [["Seems useless microscope."], (87.5,316), 200, Rect(87.5,316,70,70)],
-			"chestbox" : [["treasure box."], (541,46), 200, Rect(541,46,70,70)]
+			"chestbox" : [["treasure box."], (541,46), 200, Rect(530,35,80,80)]
 
 		
 		}
@@ -568,7 +569,6 @@ class Story:
 			display.flip()
 			time.wait(1600)
 		if not self.shipCabinMsgFinished:
-			print("Reached Narration")
 			self.message.narration(["Looks like a control room of sorts","I should look for a map and steer this ship to the island like in the anagram"], next, "top")
 			if self.message.done:
 				self.shipCabinMsgFinished = True
@@ -687,6 +687,7 @@ class Story:
 				self.availableItems.pop("laptop", None)
 						# Notification
 				msg("You obtained the laptop!")
+	
 	def Lab(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
@@ -833,8 +834,93 @@ class Story:
 				#self.availableItems.pop("testtube", None)
 						# Notification
 				msg("You need key and password to open it!")
+				self.fade.fadeDark(self.maps.allScenes["islandPassword"][0], self.screen, (0, 0))
+						# Create new scene	
+				self.maps.newScene("islandPassword")
+				# Set player coordinates
+				self.player.x = self.player.mapx+516
+				self.player.y = self.player.mapy+46
+				# Reset fade
+				self.fade.reset()
 					
-					
+	def islandPassword(self, click, password):
+		""" Ultimate shop to buy items """
+		pos = mouse.get_pos()
+
+		# Update number of prayers
+		# self.availableItems["newPrayer"][0][1] = "You have %s prayers."%str(self.prayers)
+
+		# def locate2d(element):
+		# 	""" Returns position of element in list """
+		# 	pos = 0
+		# 	for lst in range(len(self.availableItems)):
+		# 		if self.availableItems[lst][0] == element:
+		# 			pos = lst
+		# 	return pos
+
+		def msg(text, length):
+			""" Render message """
+			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.treasure.render(True, False, False, False, self.message)
+			# Render and pause
+			display.flip()
+			time.wait(length)
+
+		# Blit background
+		# self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+
+		keysDict = {
+			"1": Rect(96, 72, 170, 90),
+			"2": Rect(315, 72, 170, 90),
+			"3": Rect(531, 72, 170, 90),
+			"4": Rect(96, 200, 170, 90),
+			"5": Rect(315, 200, 170, 90),
+			"6": Rect(531, 200, 170, 90),
+			"7": Rect(96, 322, 170, 90),
+			"8": Rect(315, 322, 170, 90),
+			"9": Rect(531, 322, 170, 90),
+			"0": Rect(315, 451, 170, 90), 
+			"cancel": Rect(803, 72, 170, 90),
+			"clear": Rect(803, 200, 170, 90),
+			"enter": Rect(803, 322, 170, 90)
+		}
+		if not self.passwordMsgFinished:
+			msg("Enter Password", 1000)
+			self.passwordMsgFinished=True
+		correct = ["1", "2", "3", "4"]#original password
+		for key in keysDict:
+			if keysDict[key].collidepoint(pos):
+				if click:
+					print("Pressed", key)
+					if key!="cancel" and key!="clear" and key!="enter":
+						password.append(key)
+					if key== "cancel":
+						self.fade.fadeDark(self.maps.allScenes["finalisland"][0], self.screen, (0, 0))
+						# Create new scene	
+						self.maps.newScene("finalisland")
+						# Set player coordinates
+						self.player.x = 510
+						self.player.y = 46
+						# Reset fade
+						self.fade.reset()
+					if key=="clear":
+						password.clear()
+					if key == "enter":
+						if password == correct and ("key" in self.treasure.collectedItems):
+							print("correct password")
+							self.fade.fadeDark(self.maps.allScenes["finalisland"][0], self.screen, (0, 0))
+							# Create new scene	
+							self.maps.newScene("finalisland")
+							# Set player coordinates
+							self.player.x = 516
+							self.player.y = 46
+							# Reset fade
+							self.fade.reset()
+							msg("You have succesfully opened the safe. \n Congratulations, you can work on the cure now", 2000)
+						else:
+							msg("Password wrong/key missing", 1500)
+
 
 	def ultimateShop(self, click):
 		""" Ultimate shop to buy items """

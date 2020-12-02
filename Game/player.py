@@ -50,6 +50,7 @@ class Player(object):
 		#-534, -1585
 		self.mapCoords = {
 			# "shipCorridor":[0, -1324],
+			"finalisland":[0, 0],
 			"mainWorld": [-8340, -1744],
 			"waterWorld": [0, -602],
 			"surpriseTemple" : [0, -602],
@@ -321,8 +322,10 @@ class Player(object):
 
 		if scene in self.mapCoords.keys():
 			# print("haha")
+			print(scene)
 			print("("+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
 		else:
+			print(scene)
 			# print("nono")
 			print("("+str(self.x)+", "+str(self.y)+")")
 
