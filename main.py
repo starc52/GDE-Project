@@ -54,8 +54,13 @@ class Main:
 		self.introTextBack = image.load("resources/graphics/misc/introTextBack.png").convert()
 		self.introText = image.load("resources/graphics/misc/introText.png").convert_alpha()
 		self.introTextOver = False
+		# Scrolling exit text
+		# self.exitTextBack = image.load("resources/graphics/misc/exitTextBack.png").convert()
+		# self.exitText = image.load("resources/graphics/misc/exitText.png").convert_alpha()
 		# Text y-coordinate
 		self.introY = 600
+		self.exitY = 600
+
 		self.count=0
 		self.cursor = transform.scale2x(image.load("resources/graphics/misc/cursor.png").convert_alpha())
 		self.newGame = Rect(203,268,240,63)
@@ -113,42 +118,42 @@ class Main:
 			#"Lab" : ["pm", "i[self.story.LabHouseMsgFinished]","s[self.story.Lab(next)]", "m", "p", "c", "t"],
 			"Lab" :   ["i[self.story.LabHouseMsgFinished]","pm", "m","p", "t[self.story.LabHouseMsgFinished]", "s[self.story.Lab(next)]"],
 			"finalisland" :   ["i[self.story.islandMsgFinished]", "pm", "m","p", "t[self.story.islandMsgFinished]", "s[self.story.finalisland(next)]"],
-			"waterTemple" :		["pm", "m", "s[self.story.temple('water')]", "p", "t"],
-			"waterWorldEnter" : ["pm", "m", "s[self.story.waterWorldEnter()]", "p", "t"],
-			# Water world
-			"waterWorld" :		["i[self.story.waterWorldMsgFinished]", "m[True]", "s[self.story.waterWorld(next)]",
-								"p", "t[not self.isFighting and self.story.waterWorldMsgFinished]"],
-			"waterWorldRoom1" : ["pm", "m", "c", "p", "t"],
-			"waterWorldRoom2" : ["pm", "m", "c", "p", "t"],
-			"waterWorldRoom3" : ["pm", "m", "c", "p", "t"],
-			"waterWorldRoom4" : ["pm", "m", "c", "p", "t"],
-			"waterWorldBoss" : ["i[self.story.waterWorldBossMsgFinished]", "m[True]", "c", 
-								 "p", "t[not self.isFighting and self.story.waterWorldBossMsgFinished]", 
-								 "s[self.story.waterWorldBoss(next, self.fight)]"],
+			# "waterTemple" :		["pm", "m", "s[self.story.temple('water')]", "p", "t"],
+			# "waterWorldEnter" : ["pm", "m", "s[self.story.waterWorldEnter()]", "p", "t"],
+			# # Water world
+			# "waterWorld" :		["i[self.story.waterWorldMsgFinished]", "m[True]", "s[self.story.waterWorld(next)]",
+			# 					"p", "t[not self.isFighting and self.story.waterWorldMsgFinished]"],
+			# "waterWorldRoom1" : ["pm", "m", "c", "p", "t"],
+			# "waterWorldRoom2" : ["pm", "m", "c", "p", "t"],
+			# "waterWorldRoom3" : ["pm", "m", "c", "p", "t"],
+			# "waterWorldRoom4" : ["pm", "m", "c", "p", "t"],
+			# "waterWorldBoss" : ["i[self.story.waterWorldBossMsgFinished]", "m[True]", "c", 
+			# 					 "p", "t[not self.isFighting and self.story.waterWorldBossMsgFinished]", 
+			# 					 "s[self.story.waterWorldBoss(next, self.fight)]"],
 
-			# Fire world
-			"fireTemple" : 		["pm", "m", "s[self.story.temple('fire')]", "p", "t"],
-			"fireWorldEnter" :  ["pm", "m", "c", "p", "t"],
-			"fireWorld" : 		["i[self.story.fireWorldMsgFinished]", "m", "s[self.story.fireWorld(next)]",
-								"c", "p", "t[not self.isFighting and self.story.fireWorldMsgFinished]"],
-			"fireWorldRoom1" :  ["pm", "m", "c", "p", "t"],
-			"fireWorldRoom2" :  ["pm", "m", "c", "p", "t"],
+			# # Fire world
+			# "fireTemple" : 		["pm", "m", "s[self.story.temple('fire')]", "p", "t"],
+			# "fireWorldEnter" :  ["pm", "m", "c", "p", "t"],
+			# "fireWorld" : 		["i[self.story.fireWorldMsgFinished]", "m", "s[self.story.fireWorld(next)]",
+			# 					"c", "p", "t[not self.isFighting and self.story.fireWorldMsgFinished]"],
+			# "fireWorldRoom1" :  ["pm", "m", "c", "p", "t"],
+			# "fireWorldRoom2" :  ["pm", "m", "c", "p", "t"],
 
-			# Surprise temple
-			"surpriseTemple" :  ["i[self.story.surpriseTempleMsgFinished]", "m[True]", "c", 
-								"s[self.story.surpriseTemple(next)]", "p", 
-								"t[not self.isFighting and self.story.surpriseTempleMsgFinished]"],
+			# # Surprise temple
+			# "surpriseTemple" :  ["i[self.story.surpriseTempleMsgFinished]", "m[True]", "c", 
+			# 					"s[self.story.surpriseTemple(next)]", "p", 
+			# 					"t[not self.isFighting and self.story.surpriseTempleMsgFinished]"],
 
-			# Church
-			"church" : ["i[self.story.churchMsgFinished]", "m[True]", "c", 
-						"s[self.story.church(next)]", "p",
-						"t[not self.isFighting and self.story.churchMsgFinished]"],
+			# # Church
+			# "church" : ["i[self.story.churchMsgFinished]", "m[True]", "c", 
+			# 			"s[self.story.church(next)]", "p",
+			# 			"t[not self.isFighting and self.story.churchMsgFinished]"],
 
-			# Final Temple
-			"finalTemple" : ["pm", "m[True]", "c", "p","t[not self.isFighting]", 
-							"s[self.story.finalTemple(next)]"],
+			# # Final Temple
+			# "finalTemple" : ["pm", "m[True]", "c", "p","t[not self.isFighting]", 
+			# 				"s[self.story.finalTemple(next)]"],
 
-			"ultimateShop" : ["m", "s[self.story.ultimateShop(click)]", "t"],
+			# "ultimateShop" : ["m", "s[self.story.ultimateShop(click)]", "t"],
 			"islandPassword" : ["m", "s[self.story.islandPassword(click, self.password)]", "t"],
 			"hideout" : ["m", "s[self.story.hideout(click)]", "t"], 
 			"shipCorridor":["i[self.story.shipCorridorMsgFinished]","pm", "s[self.story.shipCorridor(next)]", "m", "p", "c", "t"], 
@@ -209,6 +214,19 @@ class Main:
 			self.fade.fadeDark(self.maps.allScenes["shipCorridor"][0], self.screen, (0, 0))
 			self.fade.reset()
 
+	def exitStory(self):
+		""" Intro to introduce story-line """
+		# Add scrolling effect
+		self.introY = max(self.introY-.2, 0)
+		self.screen.blit(self.exitTextBack, (0,0))
+		self.screen.blit(self.exitText, (0,self.introY))
+		# Pause when text reaches top then fade to game
+		if self.introY == 0:
+			time.delay(1000)
+			self.exitTextOver = True
+			self.fade.fadeDark(self.maps.allScenes["shipCorridor"][0], self.screen, (0, 0))
+			self.fade.reset()
+
 	def objectUpdate(self):
 		""" Update objects relative to large world """
 		global enemyLocs, moneyLocs
@@ -226,18 +244,18 @@ class Main:
 				# [Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (276,503)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+9356,self.player.mapCoords["mainWorld"][1]+2216,123,60), "hideout", (540,546)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+1911,self.player.mapCoords["mainWorld"][1]+2389,20,20), "surpriseTemple", (550,540)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+1036,self.player.mapCoords["mainWorld"][1]+2814,20,20), "church", (525,413)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2486,30,20), "finalTemple", (519,536)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+998,30,20), "ultimateShop", (519,536)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+1911,self.player.mapCoords["mainWorld"][1]+2389,20,20), "surpriseTemple", (550,540)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+1036,self.player.mapCoords["mainWorld"][1]+2814,20,20), "church", (525,413)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2486,30,20), "finalTemple", (519,536)],
+				# [Rect(self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+998,30,20), "ultimateShop", (519,536)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+11566,self.player.mapCoords["mainWorld"][1]+8194,30,20), "finalisland", (519,536)],
 			],
 			# "mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
 			"BurntHouse" : [[Rect(240,555,60,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
-							[Rect(178,-4.5,25,15), "dungeon", (1000,436)]	],
-			"dungeon" : [[Rect(992,486,35,15), "BurntHouse", (196.5,13.5)],
+							[Rect(178,-4.5,25,15), "dungeon", (950,436)]	],
+			"dungeon" : [[Rect(992,462,35,15), "BurntHouse", (196.5,13.5)],
 						[Rect(58,462,60,60), "Lab", (671.5,235)]	],
 
 
@@ -246,55 +264,55 @@ class Main:
 			"hideout" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9426,self.player.mapCoords["mainWorld"][1]+2344)]],
 			"finalisland" : [
 				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+11517,self.player.mapCoords["mainWorld"][1]+8171)]],
-			"waterTemple" : [
-				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1645,self.player.mapCoords["mainWorld"][1]+219)],
-				[Rect(546,113,25,15), "waterWorldEnter", (517,456)]
-			],
+			# "waterTemple" : [
+			# 	[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1645,self.player.mapCoords["mainWorld"][1]+219)],
+			# 	[Rect(546,113,25,15), "waterWorldEnter", (517,456)]
+			# ],
 
-			"waterWorldEnter" : [
-				[Rect(484,591,100,20), "waterTemple", (543,180)],
-				[Rect(503,292,70,60), "waterWorld", (533,526)]
-			],
-			"waterWorld" : [
-				[Rect(491,582,100,10), "waterWorldEnter", (520,406)],
-				[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom1", (540,520)],
-				[Rect(self.player.mapCoords["waterWorld"][0]+818,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom2", (534,528)],
-				[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+284,30,10), "waterWorldRoom3", (505,513)],
-				[Rect(self.player.mapCoords["waterWorld"][0]+821,self.player.mapCoords["waterWorld"][1]+284,30,10), "waterWorldRoom4", (526,542)],
-				[Rect(self.player.mapCoords["waterWorld"][0]+507, self.player.mapCoords["waterWorld"][1]+143, 100,20), "waterWorldBoss", 
-				(self.player.mapCoords["waterWorldBoss"][0]+530,self.player.mapCoords["waterWorldBoss"][0]+520)]
-			],
-			"waterWorldRoom1" : [[Rect(525,569,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+790)]],
-			"waterWorldRoom2" : [[Rect(525,576,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+818,self.player.mapCoords["waterWorld"][1]+790)]],
-			"waterWorldRoom3" : [[Rect(484,569,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+340)]],
-			"waterWorldRoom4" : [[Rect(512,583,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+821,self.player.mapCoords["waterWorld"][1]+340)]],
-			"waterWorldBoss" : [[Rect(self.player.mapCoords["waterWorld"][0]+490,self.player.mapCoords["waterWorld"][1]+650,100,20), "waterWorld", 
-								(self.player.mapCoords["waterWorld"][0]+533,self.player.mapCoords["waterWorld"][1]+221)]],
+			# "waterWorldEnter" : [
+			# 	[Rect(484,591,100,20), "waterTemple", (543,180)],
+			# 	[Rect(503,292,70,60), "waterWorld", (533,526)]
+			# ],
+			# "waterWorld" : [
+			# 	[Rect(491,582,100,10), "waterWorldEnter", (520,406)],
+			# 	[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom1", (540,520)],
+			# 	[Rect(self.player.mapCoords["waterWorld"][0]+818,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom2", (534,528)],
+			# 	[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+284,30,10), "waterWorldRoom3", (505,513)],
+			# 	[Rect(self.player.mapCoords["waterWorld"][0]+821,self.player.mapCoords["waterWorld"][1]+284,30,10), "waterWorldRoom4", (526,542)],
+			# 	[Rect(self.player.mapCoords["waterWorld"][0]+507, self.player.mapCoords["waterWorld"][1]+143, 100,20), "waterWorldBoss", 
+			# 	(self.player.mapCoords["waterWorldBoss"][0]+530,self.player.mapCoords["waterWorldBoss"][0]+520)]
+			# ],
+			# "waterWorldRoom1" : [[Rect(525,569,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+790)]],
+			# "waterWorldRoom2" : [[Rect(525,576,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+818,self.player.mapCoords["waterWorld"][1]+790)]],
+			# "waterWorldRoom3" : [[Rect(484,569,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+340)]],
+			# "waterWorldRoom4" : [[Rect(512,583,100,10), "waterWorld", (self.player.mapCoords["waterWorld"][0]+821,self.player.mapCoords["waterWorld"][1]+340)]],
+			# "waterWorldBoss" : [[Rect(self.player.mapCoords["waterWorld"][0]+490,self.player.mapCoords["waterWorld"][1]+650,100,20), "waterWorld", 
+			# 					(self.player.mapCoords["waterWorld"][0]+533,self.player.mapCoords["waterWorld"][1]+221)]],
 
-			"fireTemple" : [
-				[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1487)],
-				[Rect(546,113,25,15), "fireWorldEnter", (475,544)]
-			],
-			"fireWorldEnter" : [
-				[Rect(470,591,100,20), "fireTemple", (543,180)],
-				[Rect(544,88,30,25), "fireWorld", (519,337)]
-			],
-			"fireWorld" : [
-				[Rect(521,284,30,20), "fireWorldEnter", (545,161)],
-				[Rect(681,219,30,20), "fireWorldRoom1", (525,219)],
-				[Rect(361,316,30,20), "fireWorldRoom2", (522,258)]
-			],
-			"fireWorldRoom1" : [
-				[Rect(529,178,30,20), "fireWorld", (676,277)]
-			],
-			"fireWorldRoom2" : [
-				[Rect(522,204,30,20), "fireWorld", (356,369)]
-			],
+			# "fireTemple" : [
+			# 	[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1487)],
+			# 	[Rect(546,113,25,15), "fireWorldEnter", (475,544)]
+			# ],
+			# "fireWorldEnter" : [
+			# 	[Rect(470,591,100,20), "fireTemple", (543,180)],
+			# 	[Rect(544,88,30,25), "fireWorld", (519,337)]
+			# ],
+			# "fireWorld" : [
+			# 	[Rect(521,284,30,20), "fireWorldEnter", (545,161)],
+			# 	[Rect(681,219,30,20), "fireWorldRoom1", (525,219)],
+			# 	[Rect(361,316,30,20), "fireWorldRoom2", (522,258)]
+			# ],
+			# "fireWorldRoom1" : [
+			# 	[Rect(529,178,30,20), "fireWorld", (676,277)]
+			# ],
+			# "fireWorldRoom2" : [
+			# 	[Rect(522,204,30,20), "fireWorld", (356,369)]
+			# ],
 
-			"surpriseTemple" : [[Rect(500,590,100,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1901,self.player.mapCoords["mainWorld"][1]+2450)]],
-			"church" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1036,self.player.mapCoords["mainWorld"][1]+2854)]],
-			"finalTemple" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2520)]],
-			"ultimateShop" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+1050)]],
+			# "surpriseTemple" : [[Rect(500,590,100,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1901,self.player.mapCoords["mainWorld"][1]+2450)]],
+			# "church" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1036,self.player.mapCoords["mainWorld"][1]+2854)]],
+			# "finalTemple" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+132,self.player.mapCoords["mainWorld"][1]+2520)]],
+			# "ultimateShop" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+1050)]],
 			"islandPassword" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+1050)]],
 		}
 
@@ -505,19 +523,7 @@ class Main:
 							self.isFighting = self.fight.fighting
 							self.player.isMoving = False
 
-			else:
-				# if self.maps.sceneName == "shipCabin":
-				# 	print("Ha your gut's wrong")
-				# 	if self.story.shipCabinMsgFinished:
-				# 		self.fade.reset()
-				# 		if not self.maps.allScenes["mainWorld"][2]:
-				# 			self.fade.fadeDark(self.maps.allScenes["mainWorld"][0], self.screen, self.maps.allScenes["mainWorld"][1])
-				# 		# Create new scene
-				# 		self.maps.newScene("mainWorld")
-				# 		# Set new player coordinates
-				# 		self.player.x = self.sceneInfo["shipCabin"][0][2][0]
-				# 		self.player.y = self.sceneInfo["shipCabin"][0][2][1]
-						
+			else:		
 				# Use the scene sequences dictionary to call methods in order
 				for action in self.sceneSequences[self.maps.sceneName]:
 					# Move player
@@ -580,8 +586,15 @@ class Main:
 
 	def gameOverWin(self):
 		""" Game over (won) """
-		self.fade.fadeDark(self.ending, self.screen, (0,0))
-		self.screen.blit(self.ending, (0,0))
+		self.exitY = max(self.exitY-.2, 0)
+		self.screen.blit(self.exitTextBack, (0,0))
+		self.screen.blit(self.exitText, (0,self.exitY))
+		# Pause when text reaches top then fade to game
+		if self.exitY == 0:
+			time.delay(1000)
+			self.exitTextOver = True
+			self.fade.fadeDark(self.ending, self.screen, (0,0))
+			self.screen.blit(self.ending, (0,0))
 		# Set final music flag to true
 		if self.performOnce:
 			self.gameOverMusic = True
@@ -590,8 +603,7 @@ class Main:
 # changed for development purposes. enemy count initially 80.
 def enemyPoints():
 	""" Generates enemy points """
-	return [[randint(1,2016), randint(1,3036)] for i in range(800)]
-
+	return [[randint(1,14000), randint(1,8036)] for i in range(100)]	
 def moneyPoints():
 	""" Generates money points """
 	return [[randint(1,2016), randint(1,3036)] for i in range(150)]

@@ -224,21 +224,21 @@ class Treasure:
 
 			self.screen.blit(self.sPlaceholder, (940,10))
 			self.screen.blit(self.healthPercent[self.health-1], (83,22))
-			self.screen.blit(self.font.render(str(self.money), True, (255,255,255)), (111,38))
+			# self.screen.blit(self.font.render(str(self.money), True, (255,255,255)), (111,38))
 
 			# Gems
-			if self.gems["earth"]:
-				self.screen.blit(self.gemSprites["earth"][int(self.gemFrame)], (41,93))
-			else:
-				self.screen.blit(self.noGem, (41,93))
-			if self.gems["fire"]:
-				self.screen.blit(self.gemSprites["fire"][int(self.gemFrame)], (91,93))
-			else:
-				self.screen.blit(self.noGem, (91,93))
-			if self.gems["water"]:
-				self.screen.blit(self.gemSprites["water"][int(self.gemFrame)], (141,93))
-			else:
-				self.screen.blit(self.noGem, (141,93))
+			# if self.gems["earth"]:
+			# 	self.screen.blit(self.gemSprites["earth"][int(self.gemFrame)], (41,93))
+			# else:
+			# 	self.screen.blit(self.noGem, (41,93))
+			# if self.gems["fire"]:
+			# 	self.screen.blit(self.gemSprites["fire"][int(self.gemFrame)], (91,93))
+			# else:
+			# 	self.screen.blit(self.noGem, (91,93))
+			# if self.gems["water"]:
+			# 	self.screen.blit(self.gemSprites["water"][int(self.gemFrame)], (141,93))
+			# else:
+			# 	self.screen.blit(self.noGem, (141,93))
 
 			# Add to gem frames
 			self.gemFrame += .1

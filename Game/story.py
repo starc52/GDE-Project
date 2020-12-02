@@ -94,14 +94,14 @@ class Story:
 			"earthGem" : [["Some sort of shining gem.", "It seems useless..."], (876,270), 200, Rect(864,262,self.earthGemImage.get_width()*2,self.earthGemImage.get_height()*2)],
 			"healthPotion" : [["Potion to increase your health by 20."], (509,419), 50, Rect(509,419,70,70)],
 			"newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
-			"brochure" : [["Some sort of brochure.", "It seems useless..."], (876,270), 200, Rect(874,307,55,20)],
-			"letter1" : [["Some sort of letter.", "It seems useless..."], (676,250), 200, Rect(664,242,100,100)],
-			"letter2" : [["Some sort of letter.", "It seems useless..."],(132,336), 100, Rect(132,336,100,100)], 
-			"worldMap" : [["WorldMap", "It seems usefull..."],(540,192), 100, Rect(540,192,20,20)],
-			"key" : [["These seems key."], (429,339), 30, Rect(429,339,70,70)],
-			"laptop" : [["Seems useless laptop."], (825,185), 200, Rect(825,185,100,100)],
-			"testtube" : [["Seems useless testtube."], (123.5,464), 200, Rect(123.5,464,70,70)],
-			"microscope" : [["Seems useless microscope."], (87.5,309), 200, Rect(87.5,309,70,70)],
+			"brochure" : [[""], (876,270), 200, Rect(874,307,55,20)],
+			"letter1" : [["Dr.Gwen says to Dr.Nilnev, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
+			"letter2" : [["You pick up Dr. Nilnev’s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab. I'm close.. The rest of it is", " gibberish - CLUE FOR FINAL ISLAND"],(132,336), 100, Rect(132,336,100,100)], 
+			"worldMap" : [[""],(540,192), 100, Rect(540,192,20,20)],
+			"key" : [[""], (429,339), 30, Rect(429,339,70,70)],
+			"laptop" : [[""], (825,185), 200, Rect(825,185,100,100)],
+			"testtube" : [[""], (123.5,464), 200, Rect(123.5,464,70,70)],
+			"microscope" : [[""], (40.5,410), 200, Rect(40.5,410,70,70)],
 			"chestbox" : [["treasure box."], (541,46), 200, Rect(530,35,80,80)]
 
 		
@@ -147,12 +147,9 @@ class Story:
 
 		# Only do the narration scene once
 		if not self.mainWorldMsgFinished:
-			self.message.narration(["Welcome Sylon!",\
-				"The people of Oslax need your help...",\
-				"Restore the land by collecting the 3 elemental gems...",\
-				"Explore the land and prepare to face what lies ahead...",\
-				"Go and find the the enterances to new worlds!",\
-				"But first, explore this building..."], next, "top")
+			self.message.narration(["Clearly, this hideout has been deserted for quite some time.",\
+				"Who was hiding.. And from what?",\
+		], next, "top")
 			if self.message.done:
 				self.mainWorldMsgFinished = True
 				if not mac:
@@ -400,15 +397,15 @@ class Story:
 
 		def msg(text):
 			""" Render message """
-			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (255,49))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
-			time.wait(1300)
+			time.wait(1500)
 
 		# Blit background
-		self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
+		self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
 
 		# Loop through the dictionary and draw the items
 		for key,val in self.availableItems.items():
@@ -429,15 +426,15 @@ class Story:
 			["letter2", Rect(864,262,self.letter2.get_width()*2,self.letter2.get_height()*2)]
 		]:
 			if not item[1].collidepoint(pos):
-				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-				self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
-				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+				self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
+				self.screen.blit(self.message.font.render("Hover over an item to view its description.", True, (0,0,0)), (245,40))
+				self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (245,90))
 
 			else:
 				if not item[0] in self.availableItems:
-					self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (275,59))
-					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (275,109))
+					self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
+					self.screen.blit(self.message.font.render("Hover over item for its description.", True, (0,0,0)), (245,40))
+					self.screen.blit(self.message.font.render("Click on it to collect it.", True, (0,0,0)), (245,90))
 
 		# Speed boots
 		
@@ -446,9 +443,10 @@ class Story:
 		if "letter1" in self.availableItems:
 			if self.availableItems["letter1"][3].collidepoint(pos):
 				
-				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][0], True, (0,0,0)), (275,59))
-				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][1], True, (0,0,0)), (275,109))
+				self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
+				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][0], True, (0,0,0)), (245,40))
+				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][1], True, (0,0,0)), (245,90))
+				self.screen.blit(self.message.font.render(self.availableItems["letter1"][0][2], True, (0,0,0)), (245,140))
 				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["brochure"][2]), True, (255,255,255)), (515,532))
 				if click:
 						# Add item to inventory
@@ -458,14 +456,15 @@ class Story:
 					self.availableItems.pop("letter1", None)
 						# Notification
 					#if not self.brochureMsgFinished:
-					msg("Howdy Partner!You have successfully discovered the letter1.")
+					# msg("Howdy Partner!You have successfully discovered the letter1.")
 
 		if "letter2" in self.availableItems:
 			if self.availableItems["letter2"][3].collidepoint(pos):
 				
-				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][0], True, (0,0,0)), (250,40))
-				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][1], True, (0,0,0)), (250,98))
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (229,30))
+				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][0], True, (0,0,0)), (245,40))
+				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][1], True, (0,0,0)), (245,90))
+				self.screen.blit(self.message.font.render(self.availableItems["letter2"][0][2], True, (0,0,0)), (245,140))
 				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["brochure"][2]), True, (255,255,255)), (515,532))
 				if click:
 						# Add item to inventory
@@ -475,7 +474,7 @@ class Story:
 					self.availableItems.pop("letter2", None)
 						# Notification
 					#if not self.brochureMsgFinished:
-					msg("Howdy Partner!You have successfully discovered the letter2.")
+					# msg("Howdy Partner!You have successfully discovered the letter2.")
 
 
 		if self.shopReturn.collidepoint(pos) and click:
@@ -498,18 +497,18 @@ class Story:
 	def shipCorridor(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
-		def msg(text):
+		def msg(text, length):
 			""" Render message """
 			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
 			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
-			time.wait(1600)
+			time.wait(length)
 
 		# Only do the narration scene once
 		if not self.shipCorridorMsgFinished:
-			self.message.narration(["Bla1","Bla Bla Bla2","Bla Bla Bla3","Bla4"], next, "top")
+			self.message.narration(["You want answers and the only way to get them is get up and explore."], next, "top")
 			if self.message.done:
 				self.shipCorridorMsgFinished = True
 				self.message.reset()
@@ -551,8 +550,10 @@ class Story:
 				
 				self.availableItems.pop("brochure", None)
 						# Notification
-				msg("You obtained the brochure!")
-					
+				msg("It’s a brochure about some ship… The Black Pearl!", 3000)
+				msg("Someone has scrawled , “CELL HERO” on it.", 3000)
+				msg("Is it a hint?", 3000)
+
 		#print("pos 2 ")
 		#print(pos)
 		# Earth gem
@@ -560,16 +561,16 @@ class Story:
 	def shipCabin(self, next):
 		""" Main surprise temple """
 			#pos = mouse.get_pos()
-		def msg(text):
+		def msg(text, length):
 			""" Render message """
 			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
 			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
-			time.wait(1600)
+			time.wait(length)
 		if not self.shipCabinMsgFinished:
-			self.message.narration(["Looks like a control room of sorts","I should look for a map and steer this ship to the island like in the anagram"], next, "top")
+			self.message.narration(["Looks like a control room of sorts"], next, "top")
 			if self.message.done:
 				self.shipCabinMsgFinished = True
 				self.message.reset()
@@ -609,26 +610,31 @@ class Story:
 				
 				self.availableItems.pop("worldMap", None)
 						# Notification
-				msg("You obtained the worldMap!")
+
+				msg("This is no ordinary map.", 2000)
+				msg("It’s as though someone has marked on it... just for you.", 3000)
+				msg("As you read it, it is stored in the hard-disk of your memory.", 3000)
+				msg("Activate the map  by pressing the map button on the right.", 3000)
+				msg("The ship demands the location of your first stop.", 3000)
+				msg("What is it?", 2000)
 
 	def BurntHouse(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
-		def msg(text):
+		def msg(text, length):
 			""" Render message """
 			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
 			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
-			time.wait(1600)
+			time.wait(length)
 
 		# Only do the narration scene once
 		if not self.BurntHouseMsgFinished:
-			self.message.narration(["Welcome to the house of a great scientist",
-									"It is said that he hid all his treasures in this castle...",
-									"But amongst his treasures lie traps as well...",
-									"Beware what chests you open.."
+			self.message.narration(["Acccchhhooo! You start coughing and sneezing as soon as you enter.",
+									"The smell of burnt wood and ash is too strong.",
+									"Maybe you will find something useful in the ruins?"
 									], next, "top")
 			if self.message.done:
 				self.BurntHouseMsgFinished = True
@@ -671,8 +677,11 @@ class Story:
 				
 				self.availableItems.pop("key", None)
 						# Notification
-				msg("You obtained the key!")
-					
+				msg("The key is too light for its size (titanium, atomic number 22).", 3000)
+				msg("It has a striped pattern(barcode signature), you think.", 3000)
+				msg("Now how did you know that?", 2000)
+
+
 		#print("pos 2 ")
 		#print(pos)
 		# Earth gem
@@ -686,25 +695,35 @@ class Story:
 				
 				self.availableItems.pop("laptop", None)
 						# Notification
-				msg("You obtained the laptop!")
-	
+				msg("Your cyborg nature acts instinctively.", 2500)
+				msg("You retrieve the hard-disk and connect it to your brain.", 3000)
+				msg("Alas, most sectors are damaged and you see only random noise.", 3000)
+				msg("A lone grainy video plays.", 2000)
+				msg("“Frequent zombie attacks o--- coast...”", 2000)
+				msg("”high infection rate in h--- Aquesta...”, a news reporter is saying.", 3000)
+				msg("The name triggers something.", 2000)
+				msg("All around him, there is rubble.", 2500)
+				msg("People are running and screaming.", 2500)
+				msg("You just realise you haven’t seen another person in days.", 3000)
+				msg("Did the zombies kill everyone else ?", 2500)
+
+		
 	def Lab(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
-		def msg(text):
+		def msg(text, length):
 			""" Render message """
-			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
+			self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (255,59))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
-			time.wait(1600)
+			time.wait(length)
 
 		# Only do the narration scene once
 		if not self.LabHouseMsgFinished:
-			self.message.narration(["Welcome to the lab of a great scientist",
-									"It is said that he hid all his treasures in this castle...",
-									"Beware what chests you open.."
+			self.message.narration(["You have a sense of deja vu. ",
+									"Yes, you had come here with Dr. Gwen!"
 									], next, "top")
 			if self.message.done:
 				self.LabHouseMsgFinished = True
@@ -740,31 +759,45 @@ class Story:
 		if "testtube" in self.availableItems:
 			if self.availableItems["testtube"][3].collidepoint(pos):
 				# Word wrap text
-				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-				self.screen.blit(self.message.font.render(self.availableItems["testtube"][0][0], True, (0,0,0)), (275,59))
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (229,30))
+				self.screen.blit(self.message.font.render(self.availableItems["testtube"][0][0], True, (0,0,0)), (255,59))
 				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
 				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["speedBoots"][2]), True, (255,255,255)), (515,532))
 				self.treasure.collectedItems.add("testtube")
 				
 				self.availableItems.pop("testtube", None)
 						# Notification
-				msg("You obtained the testtube!")
-					
+				msg("These test tubes are strangely familiar…", 3000)
+				msg("You remember now, they are yours!", 3000)
+				msg("Yes, you used to work here before as a researcher.", 3000)
+				msg("Your name is Esra Stryker.", 2000)
+				msg("Dr. Gwen and Dr. Nevlin were your colleagues and best friends.", 3000)
+				msg("You recall everything right upto your accident. ", 3000)
+				msg("Aha! Your friends made you a cyborg to save your life. ", 3000)
+				msg("You must have been on the boat to get better treatment in Rochelle.", 3000)
+				msg("They left behind the clues in case they didn’t survive.", 3000)
 		#print("pos 2 ")
 		#print(pos)
 		# Earth gem
 		if "microscope" in self.availableItems:
 			if self.availableItems["microscope"][3].collidepoint(pos):
-				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
-				self.screen.blit(self.message.font.render(self.availableItems["microscope"][0][0], True, (0,0,0)), (275,59))
+				self.screen.blit(transform.scale(self.message.background, (600,150)), (229,30))
+				self.screen.blit(self.message.font.render(self.availableItems["microscope"][0][0], True, (0,0,0)), (255,59))
 				#self.screen.blit(self.message.font.render(self.availableItems["laptop"][0][1], True, (0,0,0)), (30,100))
 				#self.screen.blit(self.message.font.render("$ %s"%str(self.availableItems["laptop"][2]), True, (255,255,255)), (515,532))
 				self.treasure.collectedItems.add("microscope")
 				
 				self.availableItems.pop("microscope", None)
 						# Notification
-				msg("You obtained the microsope!")
-					
+				msg("You peer through the microscope, observing the virus strains.", 3000)
+				msg("You created them here.", 2000)
+				msg("You had a rare gene that made you immune. ", 3000)
+				msg("There was a mutation in your experiment and... ", 3000)
+				msg("the zombie virus leaked out. Now everyone is gone.", 2000)
+				msg("A wave of shame washes over you. ", 2500)
+				msg("But wait, weren’t you trying to make the vaccine as well?", 3000)
+				msg("Where is it? ", 2000)
+
 	def dungeon(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
@@ -780,19 +813,19 @@ class Story:
 	def finalisland(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
-		def msg(text):
+		def msg(text, length):
 			""" Render message """
 			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
 			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (275,59))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
-			time.wait(1600)
+			time.wait(length)
 
 		if not self.islandMsgFinished:
-			self.message.narration(["Welcome to the final island",
-									"It is said that he hid all his treasures in this castle...",
-									"Beware what chests you open.."
+			self.message.narration(["The vaccine is inside.",
+									" In order to access it, ",
+									" you must use the password."
 									], next,"bottom")
 			if self.message.done:
 				self.islandMsgFinished = True
@@ -833,7 +866,7 @@ class Story:
 				
 				#self.availableItems.pop("testtube", None)
 						# Notification
-				msg("You need key and password to open it!")
+				# msg("You need key and password to open it!")
 				self.fade.fadeDark(self.maps.allScenes["islandPassword"][0], self.screen, (0, 0))
 						# Create new scene	
 				self.maps.newScene("islandPassword")
@@ -917,14 +950,15 @@ class Story:
 							self.player.y = 46
 							# Reset fade
 							self.fade.reset()
-							msg("You have succesfully opened the safe.", 1000)
-							msg("Congratulations, you can now save the world.", 1000)
-							msg("Or what's left of it.", 1000)
-							
+							msg("You have succesfully opened the safe.", 2000)
+							msg("You have been responsible for this outbreak.", 3000)
+							msg("Now you alone will find the cure.", 3000)
+							msg("You resolve to develop the vaccine completely.", 3000)
+							msg("You will seek out the other survivors and build a new world.", 2000)
 							self.gameWon=True
 
 						else:
-							msg("Password wrong/key missing", 1500)
+							msg("Wrong password. Press clear and try again.", 1500)
 
 
 	def ultimateShop(self, click):

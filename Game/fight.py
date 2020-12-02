@@ -354,22 +354,22 @@ class Fight:
 							self.message.quickMessage("Enemy defeated!")
 							pause(1000)
 							# Reward player with random prize (money or health)
-							if custom == "broth":
-								prize = "water gem"
-							else:
-								prize = randint(10,25)
-							# Award the water gem
-							if prize == "water gem":
-								self.message.quickMessage("You have been rewarded with the water gem!")
-								self.treasure.gems["water"] = True
-							else:
-								if choice(["money", "health"]) == "money":
-									self.message.quickMessage("You have been rewarded with %s coins!"%(str(prize)))
-									self.treasure.money += prize
-								else:
-									self.message.quickMessage("You have been rewarded with %s health!"%str(prize))
-									self.treasure.health = min(100, self.treasure.health+prize)
-							pause(1300)
+							# if custom == "broth":
+							# 	prize = "water gem"
+							# else:
+							# 	prize = randint(10,25)
+							# # Award the water gem
+							# if prize == "water gem":
+							# 	self.message.quickMessage("You have been rewarded with the water gem!")
+							# 	self.treasure.gems["water"] = True
+							# else:
+							# 	if choice(["money", "health"]) == "money":
+							# 		self.message.quickMessage("You have been rewarded with %s coins!"%(str(prize)))
+							# 		self.treasure.money += prize
+							# 	else:
+							# 		self.message.quickMessage("You have been rewarded with %s health!"%str(prize))
+							# 		self.treasure.health = min(100, self.treasure.health+prize)
+							# pause(1300)
 
 						self.enemyStatsShowing = False
 						# Add fadeout / fadein effect

@@ -15,7 +15,7 @@ class Message(object):
 		self.background = image.load("resources/graphics/misc/msgBanner.png").convert_alpha()
 		self.optionsBg = transform.scale(image.load("resources/graphics/misc/optionsBox.png").convert_alpha(),(200,150))
 		self.select = transform.scale(image.load("resources/graphics/misc/choose.png").convert_alpha(),(70,12))
-		self.font = font.Font("resources/fonts/Cardinal.ttf", 40)
+		self.font = font.Font("resources/fonts/Cardinal.ttf", 25)
 		self.enterFont = font.Font("resources/fonts/Cardinal.ttf", 20)
 		self.black = (0,0,0)
 		self.showing = True
@@ -36,7 +36,7 @@ class Message(object):
 				self.done = True
 				self.sent = 0
 		# Render current sentence
-		self.render(story[self.sent], location, length!=1)
+		self.render(story[self.sent], location, True)
 
 	def enemyStats(self, l1, l2, done):
 		if self.enemyStatsShowing:
