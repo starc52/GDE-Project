@@ -65,7 +65,7 @@ class Fight:
 		# If player runs
 		self.fled = False
 		# Attack powers
-		self.power = 1
+		self.power = 5
 		# End fight when death occurs
 		self.killFight = False
 		# Keep track of number of attacks

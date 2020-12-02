@@ -146,7 +146,6 @@ class Treasure:
 		# Item placeholders.
 		self.placeholder = transform.scale2x(image.load("resources/graphics/misc/placeholder.png").convert_alpha())
 		self.sPlaceholder = image.load("resources/graphics/misc/dropDown.png").convert_alpha()
-		self.gemPlaceholder = transform.scale2x(image.load("resources/graphics/misc/gemPlaceholder.png").convert_alpha())
 		self.healthBar = transform.scale2x(image.load("resources/graphics/misc/healthBar.png").convert())
 
 		self.inventoryRect = Rect(1028,140,40,40)
@@ -226,7 +225,6 @@ class Treasure:
 			self.screen.blit(self.sPlaceholder, (940,10))
 			self.screen.blit(self.healthPercent[self.health-1], (83,22))
 			self.screen.blit(self.font.render(str(self.money), True, (255,255,255)), (111,38))
-			self.screen.blit(self.gemPlaceholder, (10,80))
 
 			# Gems
 			if self.gems["earth"]:

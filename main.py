@@ -590,7 +590,7 @@ class Main:
 # changed for development purposes. enemy count initially 80.
 def enemyPoints():
 	""" Generates enemy points """
-	return [[randint(1,2016), randint(1,3036)] for i in range(0)]
+	return [[randint(1,2016), randint(1,3036)] for i in range(800)]
 
 def moneyPoints():
 	""" Generates money points """
