@@ -80,23 +80,23 @@ class Treasure:
 			"brochure" : [
 				"brochure",
 				transform.scale2x(image.load("resources/graphics/items/brochure_small.png").convert_alpha()),
-				["Howdy Partner! You have successfully discovered the Black pearl’s control room. From now, you are the caption of the ship. Use it to reach the island to uncover the box of mystery.      P.S. BIEZOM LYPSEAPOCA"        ],
+				["Brochure with some","important text"],
 				(497,205),
 				Rect(497,205,50,50),
 				7],
 			"letter1" : [
 				"letter1",
 				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
-				["Howdy Partner! You have successfully discovered the letter1."],
-				(497,205),
-				Rect(497,205,50,50),
+				["You have successfully", "discovered the letter."],
+				(560,205),
+				Rect(560,205,50,50),
 				7],
 			"letter2" : [
 				"letter2",
 				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
-				["Howdy Partner! You have successfully discovered the second letter."],
-				(497,205),
-				Rect(497,205,50,50),
+				["You have successfully", "discovered the letter."],
+				(560,205),
+				Rect(560,205,50,50),
 				7],
 			"key" : [
 				"key",
@@ -109,22 +109,22 @@ class Treasure:
 				"letter2",
 				transform.scale2x(image.load("resources/graphics/items/laptop1.png").convert_alpha()),
 				["laptop for regaining", "your memory back."],
-				(497,205),
-				Rect(497,205,50,50),
+				(625,211),
+				Rect(625,211,50,50),
 				7],
 			"testtube" : [
 				"testtube",
 				transform.scale2x(image.load("resources/graphics/items/testtube.png").convert_alpha()),
 				["testtube which will help","you in future."],
-				(363,222),
-				Rect(363,222,50,50),
+				(426,262),
+				Rect(426,262,50,50),
 				7],
 			"microscope" : [
 				"microscope",
 				transform.scale2x(image.load("resources/graphics/items/microscope.png").convert_alpha()),
 				["microscope which will help","you in future."],
-				(363,268),
-				Rect(363,268,50,50),
+				(363,264),
+				Rect(363,264,50,50),
 				7],
 			"worldMap" : [
 				"worldMap",
@@ -141,7 +141,7 @@ class Treasure:
 		self.inventory = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/inventory.png").convert_alpha()))
 		self.settings = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/settings.png").convert_alpha()))
 		self.mapView = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/mapView.png").convert_alpha()))
-		self.smallMap = image.load("resources/graphics/map/smallMap.png")
+		self.smallMap = image.load("resources/graphics/map/smallMap1.png")
 
 		# Item placeholders.
 		self.placeholder = transform.scale2x(image.load("resources/graphics/misc/placeholder.png").convert_alpha())

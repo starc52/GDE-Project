@@ -41,7 +41,7 @@ class Maps:
 			"church" : [image.load("resources/graphics/map/church.png").convert(), (0,-790), True],
 			"finalTemple" : [image.load("resources/graphics/map/finalTemple.png").convert(), (0,-312), True],
 			"ultimateShop" : [transform.scale(image.load("resources/graphics/map/ultimateShop.jpg").convert(),(1086,600)), (0,0), False],
-			"hideout" : [transform.scale(image.load("resources/graphics/map/hideout_final.png").convert(),(1086,600)), (0,0), False],
+			"hideout" : [transform.scale(image.load("resources/graphics/map/hideout.png").convert(),(1086,600)), (0,0), False],
 			"dungeon" : [transform.scale(image.load("resources/graphics/map/fun_dungeon.png").convert(),(1086,600)), (0,0), False],
 			"Lab" : [transform.scale(image.load("resources/graphics/map/lab1.png").convert(),(1086,600)), (0,0), False],
 			"finalisland" : [transform.scale(image.load("resources/graphics/map/surpriseTemple.png").convert(),(1086,600)), (0,0), False]

@@ -109,8 +109,8 @@ class Player(object):
 		# All player speeds based on map
 		self.speeds = {
 			"shipCabin" : 1.5,
-			"shipCorridor" : 1.5,
-			"mainWorld" : 1.5,
+			"shipCorridor" : 2.5,
+			"mainWorld" : 4,
 			"mainWorldShop" : 2,
 			"waterTemple": 2,
 			"waterWorldEnter" : 2,

@@ -43,7 +43,7 @@ class Main:
 			mixer.music.play(loops=-1)
 
 		# Fade into loading screen
-		Fade().fadeDark(image.load("resources/graphics/misc/loading.png").convert(), self.screen, (0,0))
+		Fade().fadeDark(image.load("resources/graphics/map/start1.png").convert(), self.screen, (0,0))
 		display.flip()
 
 		# Startup / ending screens
@@ -106,10 +106,11 @@ class Main:
 		self.sceneSequences = {
 			# Main world
 			"mainWorldShop" :   ["pm", "m", "p", "t", "s[self.story.mainWorldShop(next)]"],
-			"BurntHouse" :   ["pm", "m", "p", "t", "s[self.story.BurntHouse(next)]"],
-
+			"BurntHouse" :   ["i[self.story.BurntHouseMsgFinished]","pm", "m", "p", "t", "s[self.story.BurntHouse(next)]"],
+			#"BurntHouse" :   ["pm", "i[self.story.BurntHouseMsgFinished]","s[self.story.BurntHouse(next)]", "m", "p", "c", "t"],
 			"dungeon" :   ["pm", "m", "p", "t", "s[self.story.dungeon(next)]"],
-			"Lab" :   ["pm", "m","p", "t", "s[self.story.Lab(next)]"],
+			#"Lab" : ["pm", "i[self.story.LabHouseMsgFinished]","s[self.story.Lab(next)]", "m", "p", "c", "t"],
+			"Lab" :   ["i[self.story.LabHouseMsgFinished]","pm", "m","p", "t", "s[self.story.Lab(next)]"],
 			"finalisland" :   ["pm", "m","p", "t", "s[self.story.finalisland(next)]"],
 			"waterTemple" :		["pm", "m", "s[self.story.temple('water')]", "p", "t"],
 			"waterWorldEnter" : ["pm", "m", "s[self.story.waterWorldEnter()]", "p", "t"],
@@ -221,7 +222,7 @@ class Main:
 			],
 			"mainWorld" : [
 				# [Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (534,546)],
+				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (276,554)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+9356,self.player.mapCoords["mainWorld"][1]+2216,123,60), "hideout", (540,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
@@ -232,14 +233,13 @@ class Main:
 				[Rect(self.player.mapCoords["mainWorld"][0]+11566,self.player.mapCoords["mainWorld"][1]+8194,30,20), "finalisland", (519,536)],
 			],
 			# "mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
-			"BurntHouse" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
-							[Rect(178,-4.5,25,15), "dungeon", (543,546)]	],
-			"dungeon" : [[Rect(1045,510,35,65), "BurntHouse", (196.5,13.5)],
-						[Rect(5,542,130,130), "Lab", (1057.5,398)]	],
+			"BurntHouse" : [[Rect(336,544,530,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
+							[Rect(178,-4.5,25,15), "dungeon", (1000,436)]	],
+			"dungeon" : [[Rect(992,486,35,15), "BurntHouse", (196.5,13.5)],
+						[Rect(20,542,60,130), "Lab", (671.5,235)]	],
 
 
-			"Lab" : [[Rect(671.5,240,25,15), "mainWorld", (self.player.mapCoords["mainWorld"][0]+11565.75,self.player.mapCoords["mainWorld"][1]+8198)],
-					 [Rect(233.5,550,130,40), "dungeon", (9,452.5)]	],
+			"Lab" : [[Rect(671.5,220,25,15), "dungeon", (60,452.5)]	],
 
 			"hideout" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9426,self.player.mapCoords["mainWorld"][1]+2344)]],
 			"finalisland" : [
@@ -255,7 +255,7 @@ class Main:
 			],
 			"waterWorld" : [
 				[Rect(491,582,100,10), "waterWorldEnter", (520,406)],
-				[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom1", (534,529)],
+				[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom1", (540,520)],
 				[Rect(self.player.mapCoords["waterWorld"][0]+818,self.player.mapCoords["waterWorld"][1]+732,30,10), "waterWorldRoom2", (534,528)],
 				[Rect(self.player.mapCoords["waterWorld"][0]+242,self.player.mapCoords["waterWorld"][1]+284,30,10), "waterWorldRoom3", (505,513)],
 				[Rect(self.player.mapCoords["waterWorld"][0]+821,self.player.mapCoords["waterWorld"][1]+284,30,10), "waterWorldRoom4", (526,542)],
