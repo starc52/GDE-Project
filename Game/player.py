@@ -320,14 +320,14 @@ class Player(object):
 
 
 
-		if scene in self.mapCoords.keys():
-			# print("haha")
-			print(scene)
-			print("("+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
-		else:
-			print(scene)
-			# print("nono")
-			print("("+str(self.x)+", "+str(self.y)+")")
+		# if scene in self.mapCoords.keys():
+		# 	# print("haha")
+		# 	print(scene)
+		# 	print("("+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
+		# else:
+		# 	print(scene)
+		# 	# print("nono")
+		# 	print("("+str(self.x)+", "+str(self.y)+")")
 
 
 	def die(self, click, treasure, maps, fight):

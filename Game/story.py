@@ -925,7 +925,7 @@ class Story:
 		for key in keysDict:
 			if keysDict[key].collidepoint(pos):
 				if click:
-					print("Pressed", key)
+					# print("Pressed", key)
 					if key!="cancel" and key!="clear" and key!="enter":
 						password.append(key)
 					if key== "cancel":
@@ -950,11 +950,11 @@ class Story:
 							self.player.y = 46
 							# Reset fade
 							self.fade.reset()
-							msg("You have succesfully opened the safe.", 2000)
-							msg("You have been responsible for this outbreak.", 3000)
-							msg("Now you alone will find the cure.", 3000)
-							msg("You resolve to develop the vaccine completely.", 3000)
-							msg("You will seek out the other survivors and build a new world.", 2000)
+							# msg("You have succesfully opened the safe.", 2000)
+							# msg("You have been responsible for this outbreak.", 3000)
+							# msg("Now you alone will find the cure.", 3000)
+							# msg("You resolve to develop the vaccine completely.", 3000)
+							# msg("You will seek out the other survivors and build a new world.", 2000)
 							self.gameWon=True
 
 						else:

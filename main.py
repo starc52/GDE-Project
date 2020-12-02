@@ -55,8 +55,8 @@ class Main:
 		self.introText = image.load("resources/graphics/misc/introText.png").convert_alpha()
 		self.introTextOver = False
 		# Scrolling exit text
-		# self.exitTextBack = image.load("resources/graphics/misc/exitTextBack.png").convert()
-		# self.exitText = image.load("resources/graphics/misc/exitText.png").convert_alpha()
+		self.exitTextBack = image.load("resources/graphics/misc/exitTextBack.png").convert()
+		self.exitText = image.load("resources/graphics/misc/exitText.png").convert_alpha()
 		# Text y-coordinate
 		self.introY = 600
 		self.exitY = 600
