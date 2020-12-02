@@ -48,7 +48,7 @@ class Main:
 		display.flip()
 
 		# Startup / ending screens
-		self.startup = image.load("resources/graphics/misc/startup.png").convert()
+		self.startup = image.load("resources/graphics/misc/startup1.png").convert()
 		self.ending = image.load("resources/graphics/misc/ending.png").convert()
 		# Scrolling intro text
 		self.introTextBack = image.load("resources/graphics/misc/introTextBack.png").convert()
@@ -238,10 +238,10 @@ class Main:
 			"BurntHouse" : [[Rect(240,555,60,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
 							[Rect(178,-4.5,25,15), "dungeon", (1000,436)]	],
 			"dungeon" : [[Rect(992,486,35,15), "BurntHouse", (196.5,13.5)],
-						[Rect(20,542,60,130), "Lab", (671.5,235)]	],
+						[Rect(58,462,60,60), "Lab", (671.5,235)]	],
 
 
-			"Lab" : [[Rect(671.5,220,25,15), "dungeon", (60,452.5)]	],
+			"Lab" : [[Rect(671.5,220,25,15), "dungeon", (124,462.5)]	],
 
 			"hideout" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9426,self.player.mapCoords["mainWorld"][1]+2344)]],
 			"finalisland" : [

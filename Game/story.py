@@ -99,9 +99,9 @@ class Story:
 			"letter2" : [["Some sort of letter.", "It seems useless..."],(132,336), 100, Rect(132,336,100,100)], 
 			"worldMap" : [["WorldMap", "It seems usefull..."],(540,192), 100, Rect(540,192,20,20)],
 			"key" : [["These seems key."], (429,339), 30, Rect(429,339,70,70)],
-			"laptop" : [["Seems useless laptop."], (853,185), 200, Rect(853,185,100,100)],
+			"laptop" : [["Seems useless laptop."], (825,185), 200, Rect(825,185,100,100)],
 			"testtube" : [["Seems useless testtube."], (123.5,464), 200, Rect(123.5,464,70,70)],
-			"microscope" : [["Seems useless microscope."], (87.5,316), 200, Rect(87.5,316,70,70)],
+			"microscope" : [["Seems useless microscope."], (87.5,309), 200, Rect(87.5,309,70,70)],
 			"chestbox" : [["treasure box."], (541,46), 200, Rect(530,35,80,80)]
 
 		
