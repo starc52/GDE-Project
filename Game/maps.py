@@ -48,7 +48,7 @@ class Maps:
 		}
 		# Masks for each scene
 		self.allScenesMasks = {
-			"shipCabin" : image.load("resources/graphics/map/controlroomblit.png").convert(), 
+			"shipCabin" : image.load("resources/graphics/map/control_roomblit1.png").convert(), 
 			"shipCorridor" : image.load("resources/graphics/map/final_corridorblit.png").convert(),
 			"BurntHouse" : image.load("resources/graphics/map/Webp.net-resizeimage.png").convert(),
 			"mainWorld" : transform.scale2x(image.load("resources/graphics/map/mainWorldMask.png").convert()),

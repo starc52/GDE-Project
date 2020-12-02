@@ -792,7 +792,7 @@ class Story:
 			self.message.narration(["Welcome to the final island",
 									"It is said that he hid all his treasures in this castle...",
 									"Beware what chests you open.."
-									], next, "top")
+									], next,"bottom")
 			if self.message.done:
 				self.islandMsgFinished = True
 				self.message.reset()
