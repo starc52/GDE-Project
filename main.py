@@ -224,7 +224,7 @@ class Main:
 			],
 			"mainWorld" : [
 				# [Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "mainWorldShop", (534,546)],
-				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (276,554)],
+				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (276,503)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+9356,self.player.mapCoords["mainWorld"][1]+2216,123,60), "hideout", (540,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+1651,self.player.mapCoords["mainWorld"][1]+182,20,20), "waterTemple", (543,546)],
 				[Rect(self.player.mapCoords["mainWorld"][0]+208,self.player.mapCoords["mainWorld"][1]+1427,20,10), "fireTemple", (543,546)],
@@ -235,7 +235,7 @@ class Main:
 				[Rect(self.player.mapCoords["mainWorld"][0]+11566,self.player.mapCoords["mainWorld"][1]+8194,30,20), "finalisland", (519,536)],
 			],
 			# "mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
-			"BurntHouse" : [[Rect(336,544,530,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
+			"BurntHouse" : [[Rect(240,555,60,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
 							[Rect(178,-4.5,25,15), "dungeon", (1000,436)]	],
 			"dungeon" : [[Rect(992,486,35,15), "BurntHouse", (196.5,13.5)],
 						[Rect(20,542,60,130), "Lab", (671.5,235)]	],
