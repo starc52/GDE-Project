@@ -1,9 +1,3 @@
-# treasure.py
-# Paul Krishnamurthy 2015
-# Class that contains treasures and menu
-
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 from random import randint
@@ -80,56 +74,56 @@ class Treasure:
 			"brochure" : [
 				"brochure",
 				transform.scale2x(image.load("resources/graphics/items/brochure_small.png").convert_alpha()),
-				["Brochure with some","important text"],
+				["Brochure about The Black Pearl"," with 'CELL HERO' written on it."],
 				(497,205),
 				Rect(497,205,50,50),
 				7],
 			"letter1" : [
 				"letter1",
 				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
-				["You have successfully", "discovered the letter."],
+				["Leetter from Dr.Gwen", "about the zombie apocalypse"],
 				(560,205),
 				Rect(560,205,50,50),
 				7],
 			"letter2" : [
 				"letter2",
 				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
-				["You have successfully", "discovered the letter."],
+				["Dr.Newlin's reply:working on the vaccine", "in the Teshlor lab. NEVLIN...."],
 				(560,205),
 				Rect(560,205,50,50),
 				7],
 			"key" : [
 				"key",
 				transform.scale2x(image.load("resources/graphics/items/key1.png").convert_alpha()),
-				["Key which will help","you in future."],
+				["Key which may help","you in the future."],
 				(363,209),
 				Rect(363,209,50,50),
 				7],
 			"laptop" : [
 				"letter2",
 				transform.scale2x(image.load("resources/graphics/items/laptop1.png").convert_alpha()),
-				["laptop for regaining", "your memory back."],
+				["Shows the zombie scare", "in Aquesta"],
 				(630,205),
 				Rect(630,205,50,50),
 				7],
 			"testtube" : [
 				"testtube",
 				transform.scale2x(image.load("resources/graphics/items/testtube.png").convert_alpha()),
-				["testtube which will help","you in future."],
+				["Test tube which reminded","you how you became a cyborg."],
 				(426,267),
 				Rect(426,267,50,50),
 				7],
 			"microscope" : [
 				"microscope",
 				transform.scale2x(image.load("resources/graphics/items/microscope.png").convert_alpha()),
-				["microscope which will help","you in future."],
+				["microscope which reminds you","of the vaccine."],
 				(363,264),
 				Rect(363,264,50,50),
 				7],
 			"worldMap" : [
 				"worldMap",
 				transform.scale(image.load("resources/graphics/map/null.png").convert_alpha(), (10, 10)),
-				["Howdy Partner! You have successfully discovered the second letter."],
+				["World map which helps you navigate."],
 				(540,192),
 				Rect(540,192,50,50),
 				7]

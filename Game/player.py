@@ -1,9 +1,3 @@
-# player.py
-# Paul Krishnamurthy 2015
-# Main player class
-
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 from sys import exit as abandon

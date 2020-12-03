@@ -1,9 +1,3 @@
-# maps.py
-# Paul Krishnamurthy 2015
-# Maps class to update and render scenes
-
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 

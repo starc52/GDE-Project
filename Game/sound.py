@@ -1,9 +1,3 @@
-# sound.py
-# Paul Krishnamurthy 2015
-# Plays sound effects
-
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 from Game.const import *

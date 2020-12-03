@@ -1,9 +1,3 @@
-# message.py
-# Paul Krishnamurthy 2015
-# Contants
-
-# The Last Element
-# ICS3U Final Project
 
 import os
 

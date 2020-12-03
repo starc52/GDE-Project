@@ -1,9 +1,4 @@
-# story.py
-# Paul Krishnamurthy 2015
-# Story line class
 
-# The Last Element
-# ICS3U Final Project
 
 from Game.player import Player
 from pygame import *
@@ -96,7 +91,7 @@ class Story:
 			"newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
 			"brochure" : [[""], (876,270), 200, Rect(874,307,55,20)],
 			"letter1" : [["Dr.Gwen says to Dr.Nevlin, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
-			"letter2" : [["You pick up Dr. Nevlin’s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab in Teshlor. I'm close.. The rest", "of it is gibberish - NEVLIN written repeatedly."],(132,336), 100, Rect(132,336,100,100)], 
+			"letter2" : [["You pick up Dr. Nevlin�s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab in Teshlor. I'm close.. The rest", "of it is gibberish - NEVLIN written repeatedly."],(132,336), 100, Rect(132,336,100,100)], 
 			"worldMap" : [[""],(540,192), 100, Rect(540,192,20,20)],
 			"key" : [[""], (429,339), 30, Rect(429,339,70,70)],
 			"laptop" : [[""], (825,185), 200, Rect(825,185,100,100)],
@@ -550,8 +545,8 @@ class Story:
 				
 				self.availableItems.pop("brochure", None)
 						# Notification
-				msg("It’s a brochure about some ship… The Black Pearl!", 3000)
-				msg("Someone has scrawled , “CELL HERO” on it.", 3000)
+				msg("It�s a brochure about some ship� The Black Pearl!", 3000)
+				msg("Someone has scrawled , �CELL HERO� on it.", 3000)
 				msg("Is it a hint?", 3000)
 
 		#print("pos 2 ")
@@ -612,7 +607,7 @@ class Story:
 						# Notification
 
 				msg("This is no ordinary map.", 2000)
-				msg("It’s as though someone has marked on it... just for you.", 3000)
+				msg("It�s as though someone has marked on it... just for you.", 3000)
 				msg("As you read it, it is stored in the hard-disk of your memory.", 3000)
 				msg("Activate the map  by pressing the map button on the right.", 3000)
 				msg("The ship demands the location of your first stop.", 3000)
@@ -699,12 +694,12 @@ class Story:
 				msg("You retrieve the hard-disk and connect it to your brain.", 3000)
 				msg("Alas, most sectors are damaged and you see only random noise.", 3000)
 				msg("A lone grainy video plays.", 2000)
-				msg("“Frequent zombie attacks o--- coast...”", 2000)
-				msg("”high infection rate in h--- Aquesta...”, a news reporter is saying.", 3000)
+				msg("�Frequent zombie attacks o--- coast...�", 2000)
+				msg("�high infection rate in h--- Aquesta...�, a news reporter is saying.", 3000)
 				msg("Aquesta. The name triggers something.", 2000)
 				msg("All around him, there is rubble.", 2500)
 				msg("People are running and screaming.", 2500)
-				msg("You just realise you haven’t seen another person in days.", 3000)
+				msg("You just realise you haven�t seen another person in days.", 3000)
 				msg("Did the zombies kill everyone else ?", 2500)
 
 		
@@ -767,7 +762,7 @@ class Story:
 				
 				self.availableItems.pop("testtube", None)
 						# Notification
-				msg("These test tubes are strangely familiar…", 3000)
+				msg("These test tubes are strangely familiar�", 3000)
 				msg("You remember now, they are yours!", 3000)
 				msg("Yes, you used to work here before as a researcher.", 3000)
 				msg("Your name is Esra Stryker.", 2000)
@@ -775,7 +770,7 @@ class Story:
 				msg("You recall everything right upto your accident. ", 3000)
 				msg("Aha! Your friends made you a cyborg to save your life. ", 3000)
 				msg("You must have been on the boat to get better treatment in Rochelle.", 3000)
-				msg("They left behind the clues in case they didn’t survive.", 3000)
+				msg("They left behind the clues in case they didn�t survive.", 3000)
 		#print("pos 2 ")
 		#print(pos)
 		# Earth gem
@@ -795,7 +790,7 @@ class Story:
 				msg("There was a mutation in your experiment and... ", 3000)
 				msg("the zombie virus leaked out. Now everyone is gone.", 2000)
 				msg("A wave of shame washes over you. ", 2500)
-				msg("But wait, weren’t you trying to make the cure as well?", 3000)
+				msg("But wait, weren�t you trying to make the cure as well?", 3000)
 				msg("Where is it? ", 2000)
 
 	def dungeon(self, next):

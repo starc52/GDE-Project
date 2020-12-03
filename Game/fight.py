@@ -1,9 +1,4 @@
-# fight.py
-# Paul Krishnamurthy 2015
-# Main fighting class
 
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 from random import randint, choice

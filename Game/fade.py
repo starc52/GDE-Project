@@ -1,9 +1,4 @@
-# fade.py
-# Paul Krishnamurthy 2015
-# Transitions from scene to scene
 
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 from random import *
