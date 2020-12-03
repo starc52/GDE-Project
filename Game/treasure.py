@@ -5,12 +5,13 @@ from random import randint
 class Treasure:
 	""" Displays treasures """
 
-	def __init__(self, screen, player):
+	def __init__(self, screen, player, maps):
 		self.screen = screen
 		self.player = player
+		self.maps = maps
 		# Resources
 		self.coin = transform.scale(image.load("resources/graphics/misc/coin.png").convert(),(16,16))
-
+		self.redDot = image.load("resources/graphics/misc/redDot.png").convert()
 		# Heart health system
 		# self.heart = transform.scale(image.load("resources/graphics/misc/heart.png"),(16,16))
 		# self.hHeart = self.heart.subsurface(0,0,8,16)
@@ -145,7 +146,14 @@ class Treasure:
 		self.inventoryRect = Rect(1028,140,40,40)
 		self.settingsRect = Rect(1028,187,40,40)
 		self.mapViewRect = Rect(1028,234,40,40)
-
+		self.sceneLocs = {
+			"hideout":(9311,2168),
+			"BurntHouse":(1953, 2409),
+			"dungeon":(1953,2409),
+			"Lab":(1953,2409),
+			"finalisland":(11517,8166),
+			"islandPassword":(11517,8166)
+		}
 		# Slice up health bar and add to list
 		self.healthPercent = []
 		self.div = self.healthBar.get_width()/100
@@ -201,10 +209,20 @@ class Treasure:
 	def mapViewDisplay(self, click):
 		""" Large scale map view """
 		pos = mouse.get_pos()
+		x, y = 0, 0
+		if self.maps.sceneName == "mainWorld":
+			x, y = self.player.x -self.player.mapCoords["mainWorld"][0], self.player.y-self.player.mapCoords["mainWorld"][1]
+		elif self.maps.sceneName != "shipCabin" and self.maps.sceneName != "shipCorridor":
+			x, y = self.sceneLocs[self.maps.sceneName][0], self.sceneLocs[self.maps.sceneName][1]
+		
+		smallMapLocx, smallMapLocy = 346+int((x/15564)*352), 195+int((y/9420)*355)
+		print(smallMapLocx, smallMapLocy)
 		close = Rect(707,56,56,80)
 		self.screen.blit(self.back, (0,0))
 		self.screen.blit(self.mapView, (318,30))
 		self.screen.blit(self.smallMap, (347,196))
+		if self.maps.sceneName != "shipCabin" and self.maps.sceneName != "shipCorridor":
+			self.screen.blit(self.redDot, (smallMapLocx, smallMapLocy))
 		# Check for button press
 		if close.collidepoint(pos) and click:
 			self.mapViewOn = False

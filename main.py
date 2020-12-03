@@ -79,7 +79,7 @@ class Main:
 		self.player = Player(self.screen, self.message, self.fade)
 		self.maps = Maps(self.screen, self.player)
 		self.sound = Sound()
-		self.treasure = Treasure(self.screen, self.player)
+		self.treasure = Treasure(self.screen, self.player, self.maps)
 		self.fight = Fight(self.screen, self.player, self.sound, self.message, self.treasure)
 		self.story = Story(self.message, self.treasure, self.player, self.screen, self.fade, self.maps, self.sound)
 		self.chest = Chest(self.screen, self.treasure, self.message, self.maps, self.player, self.fight, self.sound, self.fade)
@@ -111,7 +111,7 @@ class Main:
 		# c   -> treasure chest
 		self.sceneSequences = {
 			# Main world
-			"mainWorldShop" :   ["pm", "m", "p", "t", "s[self.story.mainWorldShop(next)]"],
+			# "mainWorldShop" :   ["pm", "m", "p", "t", "s[self.story.mainWorldShop(next)]"],
 			"BurntHouse" :   ["i[self.story.BurntHouseMsgFinished]","pm", "m", "p", "t[self.story.BurntHouseMsgFinished]","c","s[self.story.BurntHouse(next)]"],
 			#"BurntHouse" :   ["pm", "i[self.story.BurntHouseMsgFinished]","s[self.story.BurntHouse(next)]", "m", "p", "c", "t"],
 			"dungeon" :   ["pm", "m", "p", "t", "s[self.story.dungeon(next)]"],
@@ -645,6 +645,7 @@ running = True
 playing = False
 while running:
 	pos = mouse.get_pos()
+	# print(pos)
 	next = click = False
 
 	for e in event.get():
