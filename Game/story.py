@@ -95,8 +95,8 @@ class Story:
 			"healthPotion" : [["Potion to increase your health by 20."], (509,419), 50, Rect(509,419,70,70)],
 			"newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
 			"brochure" : [[""], (876,270), 200, Rect(874,307,55,20)],
-			"letter1" : [["Dr.Gwen says to Dr.Nilnev, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
-			"letter2" : [["You pick up Dr. Nilnev’s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab. I'm close.. The rest of it is", " gibberish - CLUE FOR FINAL ISLAND"],(132,336), 100, Rect(132,336,100,100)], 
+			"letter1" : [["Dr.Gwen says to Dr.Nevlin, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
+			"letter2" : [["You pick up Dr. Nevlin’s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab. I'm close.. The rest of it is", " gibberish - NEVLIN"],(132,336), 100, Rect(132,336,100,100)], 
 			"worldMap" : [[""],(540,192), 100, Rect(540,192,20,20)],
 			"key" : [[""], (429,339), 30, Rect(429,339,70,70)],
 			"laptop" : [[""], (825,185), 200, Rect(825,185,100,100)],
@@ -714,7 +714,7 @@ class Story:
 		def msg(text, length):
 			""" Render message """
 			self.screen.blit(transform.scale(self.message.background, (600,200)), (229,30))
-			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (255,59))
+			self.screen.blit(self.message.font.render(text, True, (0,0,0)), (245,59))
 			self.treasure.render(True, False, False, False, self.message)
 			# Render and pause
 			display.flip()
@@ -795,7 +795,7 @@ class Story:
 				msg("There was a mutation in your experiment and... ", 3000)
 				msg("the zombie virus leaked out. Now everyone is gone.", 2000)
 				msg("A wave of shame washes over you. ", 2500)
-				msg("But wait, weren’t you trying to make the vaccine as well?", 3000)
+				msg("But wait, weren’t you trying to make the cure as well?", 3000)
 				msg("Where is it? ", 2000)
 
 	def dungeon(self, next):
@@ -823,7 +823,7 @@ class Story:
 			time.wait(length)
 
 		if not self.islandMsgFinished:
-			self.message.narration(["The vaccine is inside.",
+			self.message.narration(["The cure is inside.",
 									" In order to access it, ",
 									" you must use the password."
 									], next,"bottom")
@@ -921,7 +921,7 @@ class Story:
 		if not self.passwordMsgFinished:
 			msg("Enter Password", 1000)
 			self.passwordMsgFinished=True
-		correct = ["1", "2", "3", "4"]#original password
+		correct = ["6", "3", "8", "5", "4", "6"]#original password
 		for key in keysDict:
 			if keysDict[key].collidepoint(pos):
 				if click:
@@ -940,25 +940,28 @@ class Story:
 					if key=="clear":
 						password.clear()
 					if key == "enter":
-						if password == correct and ("key" in self.treasure.collectedItems):
-							print("correct password")
-							self.fade.fadeDark(self.maps.allScenes["finalisland"][0], self.screen, (0, 0))
-							# Create new scene	
-							self.maps.newScene("finalisland")
-							# Set player coordinates
-							self.player.x = 516
-							self.player.y = 46
-							# Reset fade
-							self.fade.reset()
-							# msg("You have succesfully opened the safe.", 2000)
-							# msg("You have been responsible for this outbreak.", 3000)
-							# msg("Now you alone will find the cure.", 3000)
-							# msg("You resolve to develop the vaccine completely.", 3000)
-							# msg("You will seek out the other survivors and build a new world.", 2000)
-							self.gameWon=True
-
+						if not ("key" in self.treasure.collectedItems):
+							msg("Key Missing", 1500)
 						else:
-							msg("Wrong password. Press clear and try again.", 1500)
+							if password == correct:
+								print("correct password")
+								self.fade.fadeDark(self.maps.allScenes["finalisland"][0], self.screen, (0, 0))
+								# Create new scene	
+								self.maps.newScene("finalisland")
+								# Set player coordinates
+								self.player.x = 516
+								self.player.y = 46
+								# Reset fade
+								self.fade.reset()
+								msg("You have succesfully opened the safe.", 3000)
+								# msg("You have been responsible for this outbreak.", 3000)
+								# msg("Now you alone will find the cure.", 3000)
+								# msg("You resolve to develop the vaccine completely.", 3000)
+								# msg("You will seek out the other survivors and build a new world.", 2000)
+								self.gameWon=True
+
+							else:
+								msg("Wrong password. Press clear and try again.", 1500)
 
 
 	def ultimateShop(self, click):

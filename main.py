@@ -390,44 +390,63 @@ class Main:
 				# This hard-coded method allows for music to not be repeated in different rooms
 				if not mac:
 					# Fadeout music when in temple
-					if self.maps.sceneName == "waterTemple" or self.maps.sceneName == "fireTemple":
-						mixer.music.fadeout(500)
+					# if self.maps.sceneName == "waterTemple" or self.maps.sceneName == "fireTemple":
+					# 	mixer.music.fadeout(500)
 
 					if self.maps.sceneName == "waterWorldEnter":
 						mixer.music.fadeout(500)
 						mixer.music.load(self.sound.getMusic("waterWorldTheme"))
 						mixer.music.play(loops=-1)
 
-					elif self.maps.sceneName == "fireWorldEnter":
-						mixer.music.fadeout(500)
-						mixer.music.load(self.sound.getMusic("fireWorldTheme"))
-						mixer.music.play(loops=-1)
+					# elif self.maps.sceneName == "fireWorldEnter":
+					# 	mixer.music.fadeout(500)
+					# 	mixer.music.load(self.sound.getMusic("fireWorldTheme"))
+					# 	mixer.music.play(loops=-1)
 
-					elif self.maps.sceneName == "mainWorldShop" or self.maps.sceneName == "ultimateShop":
-						mixer.music.fadeout(500)
-						mixer.music.load(self.sound.getMusic("shopTheme"))
-						mixer.music.play(loops=-1)
+					# elif self.maps.sceneName == "mainWorldShop" or self.maps.sceneName == "ultimateShop":
+					# 	mixer.music.fadeout(500)
+					# 	mixer.music.load(self.sound.getMusic("shopTheme"))
+					# 	mixer.music.play(loops=-1)
 
-					elif self.maps.sceneName == "church":
-						mixer.music.fadeout(500)
-						mixer.music.load(self.sound.getMusic("churchTheme"))
-						mixer.music.play(loops=-1)		
+					# elif self.maps.sceneName == "church":
+					# 	mixer.music.fadeout(500)
+					# 	mixer.music.load(self.sound.getMusic("churchTheme"))
+					# 	mixer.music.play(loops=-1)		
 
-					elif self.maps.sceneName == "surpriseTemple":
-						mixer.music.fadeout(500)
-						mixer.music.load(self.sound.getMusic("castleTheme"))
-						mixer.music.play(loops=-1)
+					# elif self.maps.sceneName == "surpriseTemple":
+					# 	mixer.music.fadeout(500)
+					# 	mixer.music.load(self.sound.getMusic("castleTheme"))
+					# 	mixer.music.play(loops=-1)
 
-					elif self.maps.sceneName == "finalTemple":
+					# elif self.maps.sceneName == "finalTemple":
+					# 	mixer.music.fadeout(500)
+					# 	mixer.music.load(self.sound.getMusic("finalTempleTheme"))
+					# 	mixer.music.play(loops=-1)
+
+					elif self.maps.sceneName == "shipCabin" or self.maps.sceneName == "shipCorridor":
 						mixer.music.fadeout(500)
-						mixer.music.load(self.sound.getMusic("finalTempleTheme"))
+						mixer.music.load(self.sound.getMusic("finalIslandTheme"))
 						mixer.music.play(loops=-1)
 
 					elif self.maps.sceneName == "mainWorld":
 						mixer.music.fadeout(500)
 						mixer.music.load(self.sound.getMusic("mainWorldTheme"))
 						mixer.music.play(loops=-1)
-
+					
+					elif self.maps.sceneName == "BurntHouse" or self.maps.sceneName == "dungeon" or self.maps.sceneName == "Lab":
+						mixer.music.fadeout(500)
+						mixer.music.load(self.sound.getMusic("BurntHouseTheme"))
+						mixer.music.play(loops=-1)
+					
+					elif self.maps.sceneName == "hideout":
+						mixer.music.fadeout(500)
+						mixer.music.load(self.sound.getMusic("hideoutTheme"))
+						mixer.music.play(loops=-1)
+					
+					elif self.maps.sceneName == "finalisland":
+						mixer.music.fadeout(500)
+						mixer.music.load(self.sound.getMusic("finalIslandTheme"))
+						mixer.music.play(loops=-1)
 					# Using dictionaries was too slow...
 					# self.sound.stopMusic()
 					# if self.maps.sceneName in self.sound.sceneData:
