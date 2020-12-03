@@ -256,8 +256,8 @@ class Main:
 				[Rect(self.player.mapCoords["mainWorld"][0]+11566,self.player.mapCoords["mainWorld"][1]+8194,30,20), "finalisland", (519,536)],
 			],
 			# "mainWorldShop" : [[Rect(474,595,133,20), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)]],
-			"BurntHouse" : [[Rect(240,555,60,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
-							[Rect(178,-4.5,25,15), "dungeon", (950,436)]	],
+			"BurntHouse" : [[Rect(240,555,740,60), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1953,self.player.mapCoords["mainWorld"][1]+2402)],
+							[Rect(160,-4.5,65,15), "dungeon", (950,436)]	],
 			"dungeon" : [[Rect(992,462,35,15), "BurntHouse", (196.5,13.5)],
 						[Rect(58,462,60,60), "Lab", (671.5,235)]	],
 
