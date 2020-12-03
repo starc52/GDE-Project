@@ -23,6 +23,7 @@ class Sound(object):
 				"mainWorldFight" : "resources/sound/mainWorldFight.ogg",
 				"mainWorldTheme" : "resources/sound/travel1.ogg",
 				"waterWorldTheme" : "resources/sound/travel1.ogg",
+				"ship" : "resources/sound/theme1.ogg",
 				# "shopTheme" : "resources/sound/shop.ogg",
 				# "fireWorldTheme" : "resources/sound/fireWorld.ogg",
 				"conclusion" : "resources/sound/conclusion.ogg",

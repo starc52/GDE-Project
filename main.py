@@ -213,6 +213,9 @@ class Main:
 			self.startOver = True
 			self.fade.fadeDark(self.maps.allScenes["shipCorridor"][0], self.screen, (0, 0))
 			self.fade.reset()
+			mixer.music.fadeout(500)
+			mixer.music.load(self.sound.getMusic("ship"))
+			mixer.music.play(loops=-1)
 
 	def exitStory(self):
 		""" Intro to introduce story-line """
@@ -425,7 +428,7 @@ class Main:
 
 					elif self.maps.sceneName == "shipCabin" or self.maps.sceneName == "shipCorridor":
 						mixer.music.fadeout(500)
-						mixer.music.load(self.sound.getMusic("finalIslandTheme"))
+						mixer.music.load(self.sound.getMusic("ship"))
 						mixer.music.play(loops=-1)
 
 					elif self.maps.sceneName == "mainWorld":

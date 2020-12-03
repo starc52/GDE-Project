@@ -96,7 +96,7 @@ class Story:
 			"newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
 			"brochure" : [[""], (876,270), 200, Rect(874,307,55,20)],
 			"letter1" : [["Dr.Gwen says to Dr.Nevlin, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
-			"letter2" : [["You pick up Dr. Nevlin’s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab in Teshlor. I'm close.. The rest of it is", " gibberish - NEVLIN written repeatedly."],(132,336), 100, Rect(132,336,100,100)], 
+			"letter2" : [["You pick up Dr. Nevlin’s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab in Teshlor. I'm close.. The rest", "of it is gibberish - NEVLIN written repeatedly."],(132,336), 100, Rect(132,336,100,100)], 
 			"worldMap" : [[""],(540,192), 100, Rect(540,192,20,20)],
 			"key" : [[""], (429,339), 30, Rect(429,339,70,70)],
 			"laptop" : [[""], (825,185), 200, Rect(825,185,100,100)],
