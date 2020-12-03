@@ -686,7 +686,7 @@ while running:
 				Game.fade.fadeDark(Game.maps.allScenes["shipCorridor"][0], Game.screen, (0, 0))
 				Game.fade.reset()
 				mixer.music.fadeout(500)
-				mixer.music.load(self.sound.getMusic("ship"))
+				mixer.music.load(Game.sound.getMusic("ship"))
 				mixer.music.play(loops=-1)
 				# Game.story.shipCorridor(next)
 				playing = True
