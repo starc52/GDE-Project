@@ -56,7 +56,7 @@ class Sound(object):
 			# }
 
 			# Set sound and theme volumes
-			self.coinCollected.set_volume(.8)
+			#self.coinCollected.set_volume(.8)
 			mixer.music.set_volume(.6)
 
 	def getMusic(self, sound):

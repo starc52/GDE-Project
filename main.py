@@ -519,15 +519,15 @@ class Main:
 					self.story.intro(next)
 
 					# Money collected
-					for i in self.moneyLocsUpdate: 
-						if Rect(self.player.x,self.player.y,32,42).colliderect(Rect(i[0],i[1],2,2)):
-							# Play sound
-							if not mac:
-								self.sound.coinCollected.play()
-							# Add money to player's treasures
-							self.treasure.money += 1
-							moneyLocs = moneyPoints()
-	 
+					# for i in self.moneyLocsUpdate: 
+					# 	if Rect(self.player.x,self.player.y,32,42).colliderect(Rect(i[0],i[1],2,2)):
+					# 		# Play sound
+					# 		if not mac:
+					# 			self.sound.coinCollected.play()
+					# 		# Add money to player's treasures
+					# 		self.treasure.money += 1
+					# 		moneyLocs = moneyPoints()
+	 				
 					# Enemy fights
 					for i in self.enemyLocsUpdate:
 						if Rect(self.player.x,self.player.y,32,42).colliderect(Rect(i[0],i[1],2,2)):
