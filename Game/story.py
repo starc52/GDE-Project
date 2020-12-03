@@ -37,6 +37,7 @@ class Story:
 		# Scene intro messages
 		self.waterWorldMsgFinished = False
 		self.fireWorldMsgFinished = False
+		self.gotWorldMap = False
 		self.surpriseTempleMsgFinished = False
 		self.waterWorldBossMsgFinished = False
 		self.churchMsgFinished = False
@@ -92,7 +93,7 @@ class Story:
 			"brochure" : [[""], (876,270), 200, Rect(874,307,55,20)],
 			"letter1" : [["Dr.Gwen says to Dr.Nevlin, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
 			"letter2" : [["You pick up Dr. Nevlin�s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab in Teshlor. I'm close.. The rest", "of it is gibberish - NEVLIN written repeatedly."],(132,336), 100, Rect(132,336,100,100)], 
-			"worldMap" : [[""],(540,192), 100, Rect(540,192,20,20)],
+			"worldMap" : [[""],(240,400), 100, Rect(240,400,70,70)],
 			"key" : [[""], (429,339), 30, Rect(429,339,70,70)],
 			"laptop" : [[""], (825,185), 200, Rect(825,185,100,100)],
 			"testtube" : [[""], (123.5,464), 200, Rect(123.5,464,70,70)],
@@ -549,6 +550,12 @@ class Story:
 				msg("Someone has scrawled , �CELL HERO� on it.", 3000)
 				msg("Is it a hint?", 3000)
 
+		# if Rect(234,285,60,100).collidepoint(pos):
+		# 	if not self.gotWorldMap:
+				
+		# 	#if self.gotWorldMap == False:
+		# 		msg("You first need to obtain the worldMap",500)
+
 		#print("pos 2 ")
 		#print(pos)
 		# Earth gem
@@ -597,6 +604,7 @@ class Story:
 		if "worldMap" in self.availableItems:
 			if self.availableItems["worldMap"][3].collidepoint(pos):
 				# Word wrap text
+				self.gotWorldMap = True
 				self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
 				self.screen.blit(self.message.font.render(self.availableItems["worldMap"][0][0], True, (0,0,0)), (275,59))
 				#self.screen.blit(self.message.font.render(self.availableItems["key"][0][1], True, (0,0,0)), (275,109))
