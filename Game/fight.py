@@ -353,6 +353,9 @@ class Fight:
 						else:
 							self.message.quickMessage("Enemy defeated!")
 							pause(1000)
+							mixer.music.fadeout(500)
+							mixer.music.load(self.sound.getMusic("mainWorldTheme"))
+							mixer.music.play(loops=-1)
 							# Reward player with random prize (money or health)
 							# if custom == "broth":
 							# 	prize = "water gem"
