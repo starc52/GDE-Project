@@ -12,10 +12,10 @@ class Player(object):
 		self.fade = fade
 		# Use list comprehension to create lists of animated sprites in a dictionary
 		self.sprites = {
-			"left" : [image.load("resources/graphics/player/lMove/%s.gif"%str(i)).convert_alpha() for i in range(4)],
-			"right": [image.load("resources/graphics/player/rMove/%s.png"%str(i)).convert_alpha() for i in range(4)],
-			"down": [image.load("resources/graphics/player/dMove/%s.gif"%str(i)).convert_alpha() for i in range(4)],
-			"up": [image.load("resources/graphics/player/uMove/%s.gif"%str(i)).convert_alpha() for i in range(4)]
+			"left" : [image.load("resources/graphics/player/resized_left_move/tile%s.png"%str(i).zfill(3)).convert_alpha() for i in range(0,15,3)],
+			"right": [image.load("resources/graphics/player/resized_right_move/tile%s.png"%str(i).zfill(3)).convert_alpha() for i in range(0,15,3)],
+			"down": [image.load("resources/graphics/player/resized_back_move/tile%s.png"%str(i).zfill(3)).convert_alpha() for i in range(0,15,3)],
+			"up": [image.load("resources/graphics/player/resized_forward_move/tile%s.png"%str(i).zfill(3)).convert_alpha() for i in range(0,15,3)]
 		}
 		self.boatSprites = {
 			"left" : [image.load("resources/graphics/player/boat/lMove/%s.png"%str(i)).convert_alpha() for i in range(8)],
