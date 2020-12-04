@@ -278,7 +278,8 @@ class Player(object):
 		# if scene in self.mapCoords.keys():
 		# 	# print("haha")
 		# 	print(scene)
-		# 	print("("+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
+		# 	print("("+str(self.x)+" "+str(self.mapCoords[scene][0])+", "+str(self.y)+" "+str(self.mapCoords[scene][1])+" "+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
+
 		# else:
 		# 	print(scene)
 		# 	# print("nono")

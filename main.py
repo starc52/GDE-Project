@@ -193,7 +193,7 @@ class Main:
 			"shipCabin" : [[Rect(492,561,80,10), "shipCorridor", (449, 300)]],
 			"shipCorridor" : [
 				[Rect(404,288,90,10), "shipCabin", (543, 511)],
-				[Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9273,self.player.mapCoords["mainWorld"][1]+2125)]
+				# [Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9273,self.player.mapCoords["mainWorld"][1]+2125)]
 			],
 			"mainWorld" : [
 				[Rect(self.player.mapCoords["mainWorld"][0]+1892,self.player.mapCoords["mainWorld"][1]+2342,123,60), "BurntHouse", (276,503)],
@@ -214,6 +214,15 @@ class Main:
 			"islandPassword" : [[Rect(400,590,300,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+1284,self.player.mapCoords["mainWorld"][1]+1050)]],
 		}
 
+		if "worldMap" in self.treasure.collectedItems and self.story.selectedFirstLocation:
+			if self.story.selectedFirstLocation == "rochelle":
+				self.sceneInfo["shipCorridor"].append([Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+9273,self.player.mapCoords["mainWorld"][1]+2125)])
+			elif self.story.selectedFirstLocation == "urith":
+				self.player.mapCoords["mainWorld"] = [-5287, -8527]
+				self.sceneInfo["shipCorridor"].append([Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+5780,self.player.mapCoords["mainWorld"][1]+8758)])
+			elif self.story.selectedFirstLocation == "melborneIsles":
+				self.player.mapCoords["mainWorld"] = [-6870, -6236]
+				self.sceneInfo["shipCorridor"].append([Rect(63,272,80,10), "mainWorld", (self.player.mapCoords["mainWorld"][0]+7613,self.player.mapCoords["mainWorld"][1]+6467)])
 		# Update map coordinates if map has a scrolling cameras
 		if self.maps.allScenes[self.maps.sceneName][2]:
 			mapx, mapy = self.player.mapCoords[self.maps.sceneName]

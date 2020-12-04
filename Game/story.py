@@ -21,7 +21,7 @@ class Story:
 # just for testing remove later
 		self.treasure.collectedItems.add(self.treasure.items['boat'][0])
 
-
+		self.selectedFirstLocation="rochelle"
 		self.mainWorldMsgFinished = False
 		self.gotWorldMap = False
 		self.BurntHouseMsgFinished = False
@@ -224,15 +224,15 @@ class Story:
 				
 				self.availableItems.pop("brochure", None)
 						# Notification
-				msg("It�s a brochure about some ship� The Black Pearl!", 3000)
-				msg("Someone has scrawled , �CELL HERO� on it.", 3000)
+				msg("It's a brochure about some ship... The Black Pearl!", 3000)
+				msg("Someone has scrawled, �CELL HERO� on it.", 3000)
 				msg("Is it a hint?", 3000)
 
 		
 	
 	def shipCabin(self, next):
 		""" Main surprise temple """
-			#pos = mouse.get_pos()
+		mousePos = mouse.get_pos()
 		def msg(text, length):
 			""" Render message """
 			self.screen.blit(transform.scale(self.message.background, (600,150)), (259,30))
@@ -252,7 +252,6 @@ class Story:
 				self.screen.blit(self.worldMap, val[1])
 
 		pos=[self.player.x,self.player.y]
-		#pos=(x,y)
 		# Speed boots
 		if "worldMap" in self.availableItems:
 			if self.availableItems["worldMap"][3].collidepoint(pos):
@@ -271,6 +270,10 @@ class Story:
 				msg("Activate the map  by pressing the map button on the right.", 3000)
 				msg("The ship demands the location of your first stop.", 3000)
 				msg("What is it?", 2000)
+				# while(not self.selectedFirstLocation):
+				# 	self.selectedFirstLocation=self.message.firstLocationConfirm(click)
+				# display.flip()
+				#select first location here
 
 	def BurntHouse(self, next):
 		""" Main surprise temple """
@@ -339,8 +342,7 @@ class Story:
 				msg("People are running and screaming.", 2500)
 				msg("You just realise you haven�t seen another person in days.", 3000)
 				msg("Did the zombies kill everyone else ?", 2500)
-
-		
+	
 	def Lab(self, next):
 		""" Main surprise temple """
 		#pos = mouse.get_pos()
