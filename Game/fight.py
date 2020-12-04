@@ -23,15 +23,15 @@ class Fight:
 		# Backgrounds
 		self.backgrounds = {
 			"mainWorld" : transform.scale(image.load("resources/graphics/map/backgrounds/mainWorldFight.png").convert(),(1086,600)),
-			"mainWorldSea" : transform.scale(image.load("resources/graphics/map/backgrounds/mainWorldWaterFight.png").convert(),(1086,600)),
-			"waterWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldRoom3" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldRoom4" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldBoss" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"fireWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
-			"fireWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
-			"surpriseTemple" : transform.scale(image.load("resources/graphics/map/backgrounds/surpriseTempleFight.png").convert(),(1086,600))
+			"mainWorldSea" : transform.scale(image.load("resources/graphics/map/backgrounds/mainWorldWaterFight.png").convert(),(1086,600))
+			# "waterWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldRoom3" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldRoom4" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldBoss" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "fireWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
+			# "fireWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
+			# "surpriseTemple" : transform.scale(image.load("resources/graphics/map/backgrounds/surpriseTempleFight.png").convert(),(1086,600))
 		}
 		# Player sprites
 		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/dMove/%s.gif"%str(i)).convert_alpha()) for i in range(4)]
@@ -351,23 +351,6 @@ class Fight:
 							mixer.music.fadeout(500)
 							mixer.music.load(self.sound.getMusic("mainWorldTheme"))
 							mixer.music.play(loops=-1)
-							# Reward player with random prize (money or health)
-							# if custom == "broth":
-							# 	prize = "water gem"
-							# else:
-							# 	prize = randint(10,25)
-							# # Award the water gem
-							# if prize == "water gem":
-							# 	self.message.quickMessage("You have been rewarded with the water gem!")
-							# 	self.treasure.gems["water"] = True
-							# else:
-							# 	if choice(["money", "health"]) == "money":
-							# 		self.message.quickMessage("You have been rewarded with %s coins!"%(str(prize)))
-							# 		self.treasure.money += prize
-							# 	else:
-							# 		self.message.quickMessage("You have been rewarded with %s health!"%str(prize))
-							# 		self.treasure.health = min(100, self.treasure.health+prize)
-							# pause(1300)
 
 						self.enemyStatsShowing = False
 						# Add fadeout / fadein effect
