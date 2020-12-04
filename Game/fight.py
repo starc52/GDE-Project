@@ -33,7 +33,7 @@ class Fight:
 			# "surpriseTemple" : transform.scale(image.load("resources/graphics/map/backgrounds/surpriseTempleFight.png").convert(),(1086,600))
 		}
 		# Player sprites
-		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/resized_left_move/%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(0,15,3)]
+		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/resized_left_move/tile%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(0,15,3)]
 		self.pAttackSprites = [transform.scale2x(image.load("resources/graphics/player/attack_move/tile%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(4)]
 		self.pAttackWeapon = transform.scale2x(image.load("resources/graphics/player/attack/weapon.png").convert_alpha())
 		self.fighting = False
@@ -126,7 +126,7 @@ class Fight:
 	def playerAttack(self, attack, scene, custom=None):
 		""" Player attacking enemy """
 		mixer.music.load(self.sound.getMusic("gunshotTheme"))
-		mixer.music.play(loops=-1)
+		mixer.music.play(loops=0)
 		if custom != None:
 			self.enemy.customEnemies[custom][4] -= attack
 		else:
@@ -256,15 +256,15 @@ class Fight:
 						self.killFight = True
 
 					# Player attack animation
-					xVal=choice([795, 805])
+					xVal=choice([700, 705])
 					self.screen.blit(self.backgrounds[scene], (0,0))
-					display.update(self.screen.blit(self.pAttackSprites[0], (xVal,255)))
+					display.update(self.screen.blit(self.pAttackSprites[0], (xVal,100)))
 					time.delay(200)
 					self.screen.blit(self.backgrounds[scene], (0,0))
-					display.update(self.screen.blit(self.pAttackSprites[1], (xVal,255)))
+					display.update(self.screen.blit(self.pAttackSprites[1], (xVal,100)))
 					time.delay(200)
 					self.screen.blit(self.backgrounds[scene], (0,0))
-					display.update(self.screen.blit(self.pAttackSprites[2], (xVal,255)))
+					display.update(self.screen.blit(self.pAttackSprites[2], (xVal,100)))
 
 					# Weapon throwing animation
 					x = 720
@@ -325,7 +325,7 @@ class Fight:
 					if not self.checkDeath() == "enemy":
 						# Allow enemy to attack
 						mixer.music.load(self.sound.getMusic("zombieTheme"))
-						mixer.music.play(loops=-1)
+						mixer.music.play(loops=0)
 						if self.fighting:
 							attack = randint(0, self.curEnemy[2])
 							if attack == 0:
@@ -390,7 +390,7 @@ class Fight:
 				if self.fled:
 					# Enemy fights one last time
 					mixer.music.load(self.sound.getMusic("zombieTheme"))
-					mixer.music.play(loops=-1)
+					mixer.music.play(loops=0)
 					if not self.checkDeath() == "enemy":
 						attack = randint(0, self.curEnemy[2])
 						if attack == 0:

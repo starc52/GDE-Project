@@ -82,14 +82,14 @@ class Player(object):
 		self.frameSpeed = .2
 		# All player speeds based on map
 		self.speeds = {
-			"shipCabin" : 5,
-			"shipCorridor" : 5,
-			"mainWorld" : 5,
-			"hideout" : 5,
-			"BurntHouse" : 5,
-			"dungeon":5,
-			"Lab":5,
-			"finalisland":5
+			"shipCabin" : 3,
+			"shipCorridor" : 3,
+			"mainWorld" : 3,
+			"hideout" : 3,
+			"BurntHouse" : 3,
+			"dungeon":3,
+			"Lab":3,
+			"finalisland":3
 		}
 		# Can the player can move
 		self.canMove = False
