@@ -5,41 +5,19 @@ from random import randint
 class Treasure:
 	""" Displays treasures """
 
-	def __init__(self, screen, player):
+	def __init__(self, screen, player, maps):
 		self.screen = screen
 		self.player = player
+		self.maps = maps
 		# Resources
 		self.coin = transform.scale(image.load("resources/graphics/misc/coin.png").convert(),(16,16))
-
-		# Heart health system
-		# self.heart = transform.scale(image.load("resources/graphics/misc/heart.png"),(16,16))
-		# self.hHeart = self.heart.subsurface(0,0,8,16)
-
+		self.redDot = image.load("resources/graphics/misc/redDot.png").convert()
 		# Fonts
 		self.font = font.Font("resources/fonts/TooSimple.ttf", 12)
 		self.arial = font.SysFont("Arial", 25)
-
-		# Gem animation stuff
-		self.gemFrame = 0
-		self.gemSprites = {
-			"earth" : [image.load('resources/graphics/items/gems/eGem/eGem%s.png'%str(i)).convert_alpha() for i in range(4)],
-			"fire" : [image.load('resources/graphics/items/gems/fGem/fGem%s.png'%str(i)).convert_alpha() for i in range(4)],
-			"water" : [image.load('resources/graphics/items/gems/wGem/wGem%s.png'%str(i)).convert_alpha() for i in range(4)]
-		}
-		self.noGem = image.load("resources/graphics/items/gems/noGem.gif").convert_alpha()
-		# Check if player has been told to go to the temple
-		self.allGemsCollectedMsg = False
-		# Player's treasures
 		self.money = 10
 		# Player's health
 		self.health = 50
-		# Collected gems
-		self.gems = {
-			"earth": False,
-			"fire": False,
-			"water": False
-		}
-
 		# Weapons to keep track of max possible attack
 		self.weapons = ["sword", "flameSword"]
 		# Items -> (name, image, description, coordinates, rect, attack power)
@@ -64,13 +42,6 @@ class Treasure:
 				["Power that allows you","to travel on water."],
 				(422,200),
 				Rect(422,200,50,50)],
-			"speedBoots" : [
-				"speedBoots",
-				transform.scale(image.load("resources/graphics/items/speedBoots.png").convert_alpha(), (50,50)),
-				["Boots that increase your","speed."],
-				(565,206),
-				Rect(565,206,50,50)
-			],
 			"brochure" : [
 				"brochure",
 				transform.scale2x(image.load("resources/graphics/items/brochure_small.png").convert_alpha()),
@@ -81,14 +52,14 @@ class Treasure:
 			"letter1" : [
 				"letter1",
 				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
-				["Leetter from Dr.Gwen", "about the zombie apocalypse"],
+				["Dr.Newlin's reply:working", "on the vaccine", "in the Teshlor lab. NEVLIN...."],
 				(560,205),
 				Rect(560,205,50,50),
 				7],
 			"letter2" : [
 				"letter2",
 				transform.scale2x(image.load("resources/graphics/items/letter1_preview_rev_1.png").convert_alpha()),
-				["Dr.Newlin's reply:working on the vaccine", "in the Teshlor lab. NEVLIN...."],
+				["Dr.Newlin's reply:working", "on the vaccine", "in the Teshlor lab. NEVLIN...."],
 				(560,205),
 				Rect(560,205,50,50),
 				7],
@@ -145,7 +116,14 @@ class Treasure:
 		self.inventoryRect = Rect(1028,140,40,40)
 		self.settingsRect = Rect(1028,187,40,40)
 		self.mapViewRect = Rect(1028,234,40,40)
-
+		self.sceneLocs = {
+			"hideout":(9311,2168),
+			"BurntHouse":(1953, 2409),
+			"dungeon":(1953,2409),
+			"Lab":(1953,2409),
+			"finalisland":(11517,8166),
+			"islandPassword":(11517,8166)
+		}
 		# Slice up health bar and add to list
 		self.healthPercent = []
 		self.div = self.healthBar.get_width()/100
@@ -201,10 +179,20 @@ class Treasure:
 	def mapViewDisplay(self, click):
 		""" Large scale map view """
 		pos = mouse.get_pos()
+		x, y = 0, 0
+		if self.maps.sceneName == "mainWorld":
+			x, y = self.player.x -self.player.mapCoords["mainWorld"][0], self.player.y-self.player.mapCoords["mainWorld"][1]
+		elif self.maps.sceneName != "shipCabin" and self.maps.sceneName != "shipCorridor":
+			x, y = self.sceneLocs[self.maps.sceneName][0], self.sceneLocs[self.maps.sceneName][1]
+		
+		smallMapLocx, smallMapLocy = 346+int((x/15564)*352), 195+int((y/9420)*355)
+		#print(smallMapLocx, smallMapLocy)
 		close = Rect(707,56,56,80)
 		self.screen.blit(self.back, (0,0))
 		self.screen.blit(self.mapView, (318,30))
 		self.screen.blit(self.smallMap, (347,196))
+		if self.maps.sceneName != "shipCabin" and self.maps.sceneName != "shipCorridor":
+			self.screen.blit(self.redDot, (smallMapLocx, smallMapLocy))
 		# Check for button press
 		if close.collidepoint(pos) and click:
 			self.mapViewOn = False
@@ -218,26 +206,6 @@ class Treasure:
 
 			self.screen.blit(self.sPlaceholder, (940,10))
 			self.screen.blit(self.healthPercent[self.health-1], (83,22))
-			# self.screen.blit(self.font.render(str(self.money), True, (255,255,255)), (111,38))
-
-			# Gems
-			# if self.gems["earth"]:
-			# 	self.screen.blit(self.gemSprites["earth"][int(self.gemFrame)], (41,93))
-			# else:
-			# 	self.screen.blit(self.noGem, (41,93))
-			# if self.gems["fire"]:
-			# 	self.screen.blit(self.gemSprites["fire"][int(self.gemFrame)], (91,93))
-			# else:
-			# 	self.screen.blit(self.noGem, (91,93))
-			# if self.gems["water"]:
-			# 	self.screen.blit(self.gemSprites["water"][int(self.gemFrame)], (141,93))
-			# else:
-			# 	self.screen.blit(self.noGem, (141,93))
-
-			# Add to gem frames
-			self.gemFrame += .1
-			if self.gemFrame >= 3:
-				self.gemFrame = 0
 
 			if fighting:
 				if self.inventoryRect.collidepoint(pos) and click and not self.settingsOn and not self.mapViewOn:
@@ -257,12 +225,3 @@ class Treasure:
 				if self.mapViewOn and not self.inventoryOn and not self.settingsOn:
 					self.player.canMove = False
 					self.mapViewDisplay(click)
-
-			else:
-				# After all the 
-				if self.gems["earth"] and self.gems["fire"] and self.gems["water"]:
-					if not self.allGemsCollectedMsg:
-						message.botMessage("You have all the gems! Visit the temple!", False)
-						display.flip()
-						time.delay(1300)
-						self.allGemsCollectedMsg = True

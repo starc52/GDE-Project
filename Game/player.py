@@ -58,11 +58,6 @@ class Player(object):
 		# Dictionary of all bounding rects for moving maps
 		# Main boundary rect -> right,left,up,down boundary rects -> corner positions
 		self.boundaries = {
-			# "shipCorridor" : [
-			# 	#788, 300, 150, 600, 150, 600, 1086, 150, 1086, 150, 
-			# 	Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
-			# 	(-3305,0,0,-2176)
-			# ],
 			"mainWorld" : [
 				#788, 300, 150, 600, 150, 600, 1086, 150, 1086, 150, 
 				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
@@ -71,22 +66,6 @@ class Player(object):
 			"waterWorld" : [
 				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
 				(0,0,-70,-602)
-			],
-			"surpriseTemple" : [
-				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
-				(0,0,-70,-602)
-			],
-			"waterWorldBoss" : [
-				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
-				(0,0,-70,-572)
-			],
-			"church" : [
-				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
-				(0,0,-70,-790)
-			],
-			"finalTemple" : [
-				Rect(150,150,788,300), Rect(936,0,150,600), Rect(0,0,150,600), Rect(0,0,1086,150), Rect(0,450,1086,150),
-				(0,0,-70,-312)
 			]
 		}
 		# World view bounding rect
@@ -106,24 +85,6 @@ class Player(object):
 			"shipCabin" : 5,
 			"shipCorridor" : 5,
 			"mainWorld" : 5,
-			# "mainWorldShop" : 2,
-			# "waterTemple": 2,
-			# "waterWorldEnter" : 2,
-			# "waterWorld" : 5,
-			# "waterWorldRoom1" : 1.5,
-			# "waterWorldRoom2" : 1.5,
-			# "waterWorldRoom3" : 1.5,
-			# "waterWorldRoom4" : 1.5,
-			# "waterWorldBoss" : 1.5,
-			# "fireTemple" : 2,
-			# "fireWorldEnter" : 2,
-			# "fireWorld" : 1.5,
-			# "fireWorldRoom1" : 1.5,
-			# "fireWorldRoom2" : 1.5,
-			# "surpriseTemple" : 1.5,
-			# "church" : 1.5,
-			# "finalTemple" : 1.5,
-			# "ultimateShop" : 1.5,
 			"hideout" : 5,
 			"BurntHouse" : 5,
 			"dungeon":5,
@@ -145,7 +106,7 @@ class Player(object):
 	def get_surrounding(self, scene):
 		""" Returns collision point(s) based on direction """
 		# Scrolling maps
-		if scene in ["mainWorld", "waterWorld", "surpriseTemple", "waterWorldBoss", "church", "finalTemple"]:
+		if scene in ["mainWorld", "waterWorld"]:
 			# Return point on player relative to the world
 			if self.direction == "up":
 				return [(self.x+abs(self.mapx)+16, self.y+abs(self.mapy)+30)]
@@ -317,7 +278,8 @@ class Player(object):
 		# if scene in self.mapCoords.keys():
 		# 	# print("haha")
 		# 	print(scene)
-		# 	print("("+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
+		# 	print("("+str(self.x)+" "+str(self.mapCoords[scene][0])+", "+str(self.y)+" "+str(self.mapCoords[scene][1])+" "+str(self.x-self.mapCoords[scene][0])+", "+str(self.y-self.mapCoords[scene][1])+")")
+
 		# else:
 		# 	print(scene)
 		# 	# print("nono")
@@ -329,20 +291,6 @@ class Player(object):
 		pos = mouse.get_pos()
 		self.screen.blit(self.gameOver, (0,0))
 
-		# I changed my mind about allowing the player to continue
-		# if self.continueRect.collidepoint(pos) and click:
-		# 	# Reset player stats
-		# 	self.isAlive = True
-		# 	fight.playerDied = False
-		# 	treasure.health = 10
-		# 	treasure.money = 0
-		# 	# Send player back to starting point
-
-		# 	# Fade back into main world
-		# 	self.fade.fadeDark(maps.allScenes["mainWorld"][0], self.screen, self.mapCoords["mainWorld"])
-		# 	#display.flip()
-		# 	# self.fade.reset()
-
 		if self.abandonRect.collidepoint(pos) and click:
 			# Fade away and abandon Oslax
 			surf = Surface((1086,600))
@@ -351,12 +299,6 @@ class Player(object):
 
 			# Save results to file
 			f = open("save.dat", "w")
-			gems = ""
-			if treasure.gems["earth"]: gems += "earth "
-			if treasure.gems["fire"]: gems += "fire "
-			if treasure.gems["water"]: gems += "water "
-			f.write(gems+"\n")
-			f.write("10"+"\n")
 			f.write(str(treasure.money)+"\n")
 			f.close()
 			abandon(0)
@@ -367,7 +309,3 @@ class Player(object):
 		# If player is alive, render screen
 		if self.isAlive:
 			self.screen.blit(self.image, (self.x, self.y))
-			# Notification when trying to travel on water without boat
-			if self.waterAttempt:
-				self.message.narration(["You need to obtain the power to travel on water..."], False, "bottom")
-

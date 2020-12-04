@@ -1,9 +1,4 @@
 # chest.py
-# Paul Krishnamurthy 2015
-# Handle treasure chest actions
-
-# The Third Element
-# ICS3U Final Project
 
 from pygame import *
 from random import choice, randint
@@ -25,49 +20,6 @@ class Chest:
 		self.openChest = image.load("resources/graphics/items/chest-opened.png")
 		# Possible random prizes (basic)
 		self.prizes = ["money", "health", "enemy"]
-
-		# Each chest has -> (position, state [opened or not], random prize, scrolling view)
-		self.allChests = {
-			"surpriseTemple" : [
-				[[482,729], False, choice(self.prizes), True],
-				[[614,729], False, choice(self.prizes), True],
-				[[614,645], False, choice(self.prizes), True],
-				[[482,320], False, choice(self.prizes), True],
-				[[614,320], False, choice(self.prizes), True],
-				[[482,400], False, choice(self.prizes), True],
-				[[494,94], False, choice(self.prizes), True],
-				[[609,94], False, choice(self.prizes), True],
-				[[482,645], False, choice(self.prizes), True]
-			],
-			"waterWorldRoom1" : [[[531,288], False, choice(self.prizes[:1]), False]],
-			"waterWorldRoom2" : [[[533,204], False, "enemy", False]],
-			"waterWorldRoom3": [[[507,169], False, choice(self.prizes[:1]), False]],
-			"waterWorldRoom4" : [[[526,278], False, "enemy", False]],
-			"waterWorldBoss" : [[[526,278], False, "full health", True]],
-
-			"fireWorldEnter" : [
-				# Good prize
-				[[1026,478], False, choice(self.prizes[:1]), False],
-				[[23,340], False, choice(self.prizes[:1]), False],
-				[[867,222], False, choice(self.prizes[:1]), False]
-			],
-			"fireWorld" : [
-				# Flame Sword
-				[[694,484], False, "flameSword", False]
-			],
-			"fireWorldRoom1" : [
-				[[694,365], False, choice(self.prizes), False],
-				# Chest that contains the fire gem
-				[[523,533], False, "fire gem", False],
-				[[335,533], False, choice(self.prizes), False]
-			],
-			"fireWorldRoom2" : [[[524,411], False, choice(self.prizes), False]],
-			"finalTemple" : [
-				[[347,340], False, choice(self.prizes[:1]), True],
-				[[525,337], False, choice(self.prizes[:1]), True],
-				[[705,337], False, choice(self.prizes[:1]), True]
-			]
-		}
 
 	def render(self, pRect):
 		""" Renders treasure chest """
