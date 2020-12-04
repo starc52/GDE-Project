@@ -16,6 +16,7 @@ class Enemy(object):
 			"Zombie" : [[transform.scale2x(image.load("resources/graphics/enemies/Skeleton Dancer/%s.png"%str(i)).convert_alpha()) for i in range(3)],
 								(141,244), [2,2,2,3,3,2], (151,202)]
 		}
+		#0-4 in attack is for attack, 5-9 is for appear, 10-12 is to walk.
 		self.waterEnemyData = {
 			"Zombie" : [[transform.scale2x(image.load("resources/graphics/enemies/Skeleton Dancer/%s.png"%str(i)).convert_alpha()) for i in range(3)],
 								(141,244), [2,2,2,3,3,2], (151,202)]

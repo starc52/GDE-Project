@@ -24,7 +24,9 @@ class Sound(object):
 				"introTheme" : "resources/sound/introTheme.ogg",
 				"BurntHouseTheme" : "resources/sound/mystery1.ogg",
 				"hideoutTheme" : "resources/sound/mystery2.ogg",
-				"finalIslandTheme" : "resources/sound/mystery3.ogg"
+				"finalIslandTheme" : "resources/sound/mystery3.ogg",
+				"zombieTheme" : "resources/sound/zombie-17.ogg",
+				"gunshotTheme" : "resources/sound/SHOOT025.ogg"
 				# "churchTheme" : "resources/sound/church.ogg",
 				# "castleTheme" : "resources/sound/castle.ogg",
 				# "finalTempleTheme" : "resources/sound/temple.ogg"

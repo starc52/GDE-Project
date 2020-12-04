@@ -1,5 +1,4 @@
 
-
 from pygame import *
 from random import randint, choice
 
@@ -23,19 +22,19 @@ class Fight:
 		# Backgrounds
 		self.backgrounds = {
 			"mainWorld" : transform.scale(image.load("resources/graphics/map/backgrounds/mainWorldFight.png").convert(),(1086,600)),
-			"mainWorldSea" : transform.scale(image.load("resources/graphics/map/backgrounds/mainWorldWaterFight.png").convert(),(1086,600)),
-			"waterWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldRoom3" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldRoom4" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"waterWorldBoss" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
-			"fireWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
-			"fireWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
-			"surpriseTemple" : transform.scale(image.load("resources/graphics/map/backgrounds/surpriseTempleFight.png").convert(),(1086,600))
+			"mainWorldSea" : transform.scale(image.load("resources/graphics/map/backgrounds/mainWorldWaterFight.png").convert(),(1086,600))
+			# "waterWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldRoom3" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldRoom4" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "waterWorldBoss" : transform.scale(image.load("resources/graphics/map/backgrounds/waterWorldFight.png").convert(),(1086,600)),
+			# "fireWorldRoom1" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
+			# "fireWorldRoom2" : transform.scale(image.load("resources/graphics/map/backgrounds/fireWorldFight.png").convert(),(1086,600)),
+			# "surpriseTemple" : transform.scale(image.load("resources/graphics/map/backgrounds/surpriseTempleFight.png").convert(),(1086,600))
 		}
 		# Player sprites
-		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/dMove/%s.gif"%str(i)).convert_alpha()) for i in range(4)]
-		self.pAttackSprites = [transform.scale2x(image.load("resources/graphics/player/attack/%s.png"%str(i)).convert_alpha()) for i in range(3)]
+		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/resized_left_move/%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(0,15,3)]
+		self.pAttackSprites = [transform.scale2x(image.load("resources/graphics/player/attack_move/tile%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(4)]
 		self.pAttackWeapon = transform.scale2x(image.load("resources/graphics/player/attack/weapon.png").convert_alpha())
 		self.fighting = False
 
@@ -126,6 +125,8 @@ class Fight:
 
 	def playerAttack(self, attack, scene, custom=None):
 		""" Player attacking enemy """
+		mixer.music.load(self.sound.getMusic("gunshotTheme"))
+		mixer.music.play(loops=-1)
 		if custom != None:
 			self.enemy.customEnemies[custom][4] -= attack
 		else:
@@ -270,7 +271,7 @@ class Fight:
 					# Set the boundary
 					while x > 200:
 						self.screen.blit(self.backgrounds[scene], (0,0))
-						self.screen.blit(self.pAttackWeapon, (x,245))
+						# self.screen.blit(self.pAttackWeapon, (x,245))
 						self.message.attackConfirm(False)
 						self.treasure.render(self.screen, True, maps.sceneName=="mainWorld", False, self.message)
 						drawCharacters(True)
@@ -323,6 +324,8 @@ class Fight:
 					# Enemy action
 					if not self.checkDeath() == "enemy":
 						# Allow enemy to attack
+						mixer.music.load(self.sound.getMusic("zombieTheme"))
+						mixer.music.play(loops=-1)
 						if self.fighting:
 							attack = randint(0, self.curEnemy[2])
 							if attack == 0:
@@ -348,9 +351,6 @@ class Fight:
 						else:
 							self.message.quickMessage("Enemy defeated!")
 							pause(1000)
-							mixer.music.fadeout(500)
-							mixer.music.load(self.sound.getMusic("mainWorldTheme"))
-							mixer.music.play(loops=-1)
 							# Reward player with random prize (money or health)
 							# if custom == "broth":
 							# 	prize = "water gem"
@@ -403,6 +403,8 @@ class Fight:
 
 				if self.fled:
 					# Enemy fights one last time
+					mixer.music.load(self.sound.getMusic("zombieTheme"))
+					mixer.music.play(loops=-1)
 					if not self.checkDeath() == "enemy":
 						attack = randint(0, self.curEnemy[2])
 						if attack == 0:

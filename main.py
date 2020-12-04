@@ -1,10 +1,4 @@
-#!/usr/bin/env python
 
-"""
-The Third Element
-ICS3U Final Project
-Paul Krishnamurthy 2015
-"""
 
 from pygame import *
 from os import environ
@@ -625,7 +619,7 @@ class Main:
 # changed for development purposes. enemy count initially 80.
 def enemyPoints():
 	""" Generates enemy points """
-	return [[randint(1,14000), randint(1,8036)] for i in range(100)]	
+	return [[randint(1,14000), randint(1,8036)] for i in range(1000)]	
 def moneyPoints():
 	""" Generates money points """
 	return [[randint(1,2016), randint(1,3036)] for i in range(150)]
