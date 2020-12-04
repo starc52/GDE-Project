@@ -38,7 +38,7 @@ class Story:
 		
 		self.letter1 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
 		self.letter2 = transform.scale(image.load("resources/graphics/items/letter1_preview_rev_1.png"),(70,70))
-		self.brochure = transform.scale(image.load("resources/graphics/items/brochure.png"),(70,70))
+		self.brochure = transform.scale(image.load("resources/graphics/items/brochure.png"),(80,80))
 		self.worldMap = transform.scale(image.load("resources/graphics/map/null.png"),(70,70))
 		self.key = transform.scale(image.load("resources/graphics/items/key.png"),(70,70))
 		self.laptop = transform.scale(image.load("resources/graphics/items/laptop.png"),(160,130))
@@ -54,7 +54,7 @@ class Story:
 			# "earthGem" : [["Some sort of shining gem.", "It seems useless..."], (876,270), 200, Rect(864,262,self.earthGemImage.get_width()*2,self.earthGemImage.get_height()*2)],
 			"healthPotion" : [["Potion to increase your health by 20."], (509,419), 50, Rect(509,419,70,70)],
 			# "newPrayer" : [["New prayer to use at the church.", "You have %s prayers."%str(self.prayers)], (132,336), 100, Rect(132,336,100,100)],
-			"brochure" : [[""], (876,270), 200, Rect(874,307,55,20)],
+			"brochure" : [[""], (876,270), 200, Rect(865,270,70,70)],
 			"letter1" : [["Dr.Gwen says to Dr.Nevlin, ' I fear the zombie virus is far", "deadlier than we ever imagined. I have many unconfirmed reports , but", "there is no point spreading panic.'"], (676,250), 200, Rect(664,242,100,100)],
 			"letter2" : [["You pick up Dr. Nevlin�s letter. 'Hope you are safe in the bunker.I ", "am working on the cure in our lab in Teshlor. I'm close.. The rest", "of it is gibberish - NEVLIN written repeatedly."],(132,336), 100, Rect(132,336,100,100)], 
 			"worldMap" : [[""],(240,400), 100, Rect(240,400,70,70)],
