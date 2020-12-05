@@ -104,7 +104,7 @@ class Treasure:
 		self.collectedItems = set()
 		# For speed instead of drawing text
 		self.inventory = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/inventory.png").convert_alpha()))
-		self.settings = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/settings.png").convert_alpha()))
+		self.settings = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/settings1.jpg").convert_alpha()))
 		self.mapView = transform.scale2x(transform.scale2x(image.load("resources/graphics/misc/mapView.png").convert_alpha()))
 		self.smallMap = image.load("resources/graphics/map/smallMap1.png")
 
