@@ -33,7 +33,7 @@ class Fight:
 			# "surpriseTemple" : transform.scale(image.load("resources/graphics/map/backgrounds/surpriseTempleFight.png").convert(),(1086,600))
 		}
 		# Player sprites
-		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/resized_left_move/tile%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(0,15,3)]
+		self.pSprites  = [transform.scale2x(image.load("resources/graphics/player/resized_left_move/tile%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(0,15, 3)]
 		self.pAttackSprites = [transform.scale2x(image.load("resources/graphics/player/attack_move/tile%s.png"%str(i).zfill(3)).convert_alpha()) for i in range(4)]
 		self.pAttackWeapon = transform.scale2x(image.load("resources/graphics/player/attack/weapon.png").convert_alpha())
 		self.fighting = False
